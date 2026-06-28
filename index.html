@@ -117,6 +117,22 @@ body.admin-editing [contenteditable="true"]{outline:1.5px dashed rgba(26,106,177
 body.admin-editing [contenteditable="true"]:hover{outline-color:rgba(26,106,177,.85)}
 body.admin-editing [contenteditable="true"]:focus{outline:2px solid #1a6ab1;background:#fffdf2}
 body.admin-editing .fi .fa{display:block !important}
+body.admin-editing .admin-img{cursor:pointer;outline:2px dashed rgba(26,106,177,.6);outline-offset:-2px;position:relative}
+body.admin-editing .admin-img:hover{outline:2px solid #1a6ab1}
+#adminImgModal{position:fixed;inset:0;z-index:100000;background:rgba(8,18,36,.66);display:none;align-items:center;justify-content:center;padding:18px;font-family:'Inter',sans-serif}
+#adminImgModal.show{display:flex}
+#adminImgModal .aim-box{background:#fff;border-radius:14px;width:100%;max-width:440px;padding:20px;box-shadow:0 18px 50px rgba(0,0,0,.35)}
+#adminImgModal .aim-title{font-size:15px;font-weight:700;color:#1a2e4a;margin-bottom:12px}
+#adminImgModal label{display:block;font-size:11px;font-weight:600;color:#8a8780;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
+#adminImgModal input{width:100%;font-family:inherit;font-size:13px;padding:9px 11px;border:1px solid #d8d5cc;border-radius:8px;color:#1a1a18}
+#adminImgModal input:focus{outline:2px solid #1a6ab1;border-color:#1a6ab1}
+#adminImgModal .aim-prev{margin-top:12px;height:150px;border-radius:9px;overflow:hidden;background:#f0ede6;display:flex;align-items:center;justify-content:center}
+#adminImgModal .aim-prev img{width:100%;height:100%;object-fit:cover}
+#adminImgModal .aim-prev .aim-ph{font-size:12px;color:#9a9890}
+#adminImgModal .aim-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
+#adminImgModal button{font-family:inherit;font-size:13px;font-weight:600;border:none;border-radius:8px;padding:9px 16px;cursor:pointer}
+#adminImgModal .aim-apply{background:#1a6ab1;color:#fff}
+#adminImgModal .aim-cancel{background:#f0ede6;color:#46443c}
 </style>
 </head>
 <body>
@@ -1397,7 +1413,7 @@ function tf(el){
   var params = new URLSearchParams(location.search);
   if(!params.has('admin')) return;            // invisible to normal visitors
 
-  /* Text regions that are safe to edit. Structure & images stay locked. */
+  /* Text regions that are safe to edit. */
   var EDITABLE = [
     '.hero-eyebrow','.hero h1','.hero-sub',
     '.dest-text h2','.dest-text p','.dtag',
@@ -1407,6 +1423,9 @@ function tf(el){
     '.acard h3','.acard li span',
     '.tip','.warn','.good','.red'
   ].join(',');
+
+  /* Images that can be swapped by pasting a new URL. */
+  var IMG_EDITABLE = ['.hero-img','.dest-banner img','.pcard img'].join(',');
 
   var pwd=null, editing=false;
 
@@ -1429,15 +1448,68 @@ function tf(el){
   var btnSave=bar.querySelector('#aSave');
   var btnCancel=bar.querySelector('#aCancel');
 
+  /* Image picker modal */
+  var modal=document.createElement('div');
+  modal.id='adminImgModal';
+  modal.innerHTML=''
+    +'<div class="aim-box">'
+    +'  <div class="aim-title">Change image</div>'
+    +'  <label>Image URL</label>'
+    +'  <input id="aimUrl" type="text" placeholder="https://... paste an image link" autocomplete="off">'
+    +'  <div class="aim-prev"><span class="aim-ph">Preview</span></div>'
+    +'  <div class="aim-actions">'
+    +'    <button class="aim-cancel" id="aimCancel">Cancel</button>'
+    +'    <button class="aim-apply" id="aimApply">Apply</button>'
+    +'  </div>'
+    +'</div>';
+  document.body.appendChild(modal);
+  var aimUrl=modal.querySelector('#aimUrl');
+  var aimPrev=modal.querySelector('.aim-prev');
+  var aimApply=modal.querySelector('#aimApply');
+  var aimCancel=modal.querySelector('#aimCancel');
+  var currentImg=null;
+
+  function renderPreview(url){
+    if(url){ aimPrev.innerHTML='<img alt="preview" src="'+url.replace(/"/g,'&quot;')+'">'; }
+    else { aimPrev.innerHTML='<span class="aim-ph">Preview</span>'; }
+  }
+  function openImgEditor(img){
+    currentImg=img;
+    var cur=img.getAttribute('src')||'';
+    aimUrl.value=cur; renderPreview(cur);
+    modal.classList.add('show'); aimUrl.focus(); aimUrl.select();
+  }
+  function closeImgEditor(){ modal.classList.remove('show'); currentImg=null; }
+  aimUrl.addEventListener('input',function(){ renderPreview(aimUrl.value.trim()); });
+  aimApply.addEventListener('click',function(){
+    if(currentImg){ var u=aimUrl.value.trim(); currentImg.setAttribute('src',u); currentImg.src=u; }
+    closeImgEditor();
+  });
+  aimCancel.addEventListener('click',closeImgEditor);
+  modal.addEventListener('click',function(e){ if(e.target===modal) closeImgEditor(); });
+
   /* Stop FAQ/tab click handlers from firing while editing so clicks place the cursor. */
   document.querySelectorAll('.fq').forEach(function(q){
     q.addEventListener('click',function(e){ if(editing) e.stopImmediatePropagation(); },true);
+  });
+
+  /* Clicking an image while editing opens the picker. */
+  document.querySelectorAll(IMG_EDITABLE).forEach(function(img){
+    img.addEventListener('click',function(e){
+      if(!editing) return;
+      e.preventDefault(); e.stopImmediatePropagation();
+      openImgEditor(img);
+    },true);
   });
 
   function setEditable(on){
     document.querySelectorAll(EDITABLE).forEach(function(el){
       if(on) el.setAttribute('contenteditable','true');
       else   el.removeAttribute('contenteditable');
+    });
+    document.querySelectorAll(IMG_EDITABLE).forEach(function(img){
+      if(on) img.classList.add('admin-img');
+      else   img.classList.remove('admin-img');
     });
     document.body.classList.toggle('admin-editing',on);
   }
@@ -1448,7 +1520,7 @@ function tf(el){
     editing=true; setEditable(true);
     btnEdit.style.display='none'; pwdInput.style.display='none';
     btnSave.style.display=''; btnCancel.style.display='';
-    status.textContent='Editing — click any text to change it';
+    status.textContent='Editing — click text to edit, click an image to swap it';
   }
   function exitEdit(reload){
     editing=false; setEditable(false);
@@ -1460,8 +1532,10 @@ function tf(el){
   function serialize(){
     var clone=document.documentElement.cloneNode(true);
     clone.querySelectorAll('[contenteditable]').forEach(function(el){el.removeAttribute('contenteditable');});
+    clone.querySelectorAll('.admin-img').forEach(function(el){el.classList.remove('admin-img');});
     var bd=clone.querySelector('body'); if(bd) bd.classList.remove('admin-editing');
     var ab=clone.querySelector('#adminBar'); if(ab&&ab.parentNode) ab.parentNode.removeChild(ab);
+    var im=clone.querySelector('#adminImgModal'); if(im&&im.parentNode) im.parentNode.removeChild(im);
     return '<!DOCTYPE html>\n'+clone.outerHTML;
   }
 

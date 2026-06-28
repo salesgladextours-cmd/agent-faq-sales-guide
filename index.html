@@ -99,6 +99,25 @@ body{font-family:'Inter',sans-serif;background:#f5f4f0;color:#1a1a18;line-height
   .month-grid{grid-template-columns:repeat(4,1fr)}
 }
 </style>
+<style id="admin-styles">
+#adminBar{position:fixed;left:0;right:0;bottom:0;z-index:99999;background:#0d1b2e;color:#fff;display:none;align-items:center;gap:10px;padding:10px 16px;font-family:'Inter',sans-serif;font-size:13px;box-shadow:0 -2px 14px rgba(0,0,0,.3)}
+#adminBar.show{display:flex}
+#adminBar strong{font-weight:700;letter-spacing:.02em}
+#adminBar .sp{flex:1}
+#adminBar button{font-family:inherit;font-size:13px;font-weight:600;border:none;border-radius:7px;padding:8px 14px;cursor:pointer}
+#adminBar button:disabled{opacity:.55;cursor:default}
+#adminBar .b-edit{background:#1a6ab1;color:#fff}
+#adminBar .b-save{background:#1a9a50;color:#fff}
+#adminBar .b-cancel{background:transparent;color:#cdd5e0;border:1px solid #3a4a60}
+#adminBar input{font-family:inherit;font-size:13px;padding:7px 10px;border-radius:7px;border:1px solid #3a4a60;background:#16263c;color:#fff}
+#adminBar input::placeholder{color:#7e90a8}
+#adminBar .status{font-size:12px;color:#9fb3c8}
+body.admin-editing{padding-bottom:60px}
+body.admin-editing [contenteditable="true"]{outline:1.5px dashed rgba(26,106,177,.5);outline-offset:2px;border-radius:3px;cursor:text}
+body.admin-editing [contenteditable="true"]:hover{outline-color:rgba(26,106,177,.85)}
+body.admin-editing [contenteditable="true"]:focus{outline:2px solid #1a6ab1;background:#fffdf2}
+body.admin-editing .fi .fa{display:block !important}
+</style>
 </head>
 <body>
 
@@ -1371,6 +1390,101 @@ function tf(el){
   document.querySelectorAll('.fi.open').forEach(i=>i.classList.remove('open'));
   if(!was)item.classList.add('open');
 }
+</script>
+<script>
+/* ---- Lightweight admin editor (text-only). Activate with ?admin in the URL. ---- */
+(function(){
+  var params = new URLSearchParams(location.search);
+  if(!params.has('admin')) return;            // invisible to normal visitors
+
+  /* Text regions that are safe to edit. Structure & images stay locked. */
+  var EDITABLE = [
+    '.hero-eyebrow','.hero h1','.hero-sub',
+    '.dest-text h2','.dest-text p','.dtag',
+    '.photos-title','.pcard-lbl',
+    '.rl','.rv','.rs',
+    '.faq-title','.fqt','.fa',
+    '.acard h3','.acard li span',
+    '.tip','.warn','.good','.red'
+  ].join(',');
+
+  var pwd=null, editing=false;
+
+  var bar=document.createElement('div');
+  bar.id='adminBar';
+  bar.innerHTML=''
+    +'<strong>Admin</strong>'
+    +'<span class="status" id="aStatus">Locked</span>'
+    +'<span class="sp"></span>'
+    +'<input id="aPwd" type="password" placeholder="Admin password" style="width:160px" autocomplete="off">'
+    +'<button class="b-edit" id="aEdit">Edit content</button>'
+    +'<button class="b-save" id="aSave" style="display:none">Save changes</button>'
+    +'<button class="b-cancel" id="aCancel" style="display:none">Cancel</button>';
+  document.body.appendChild(bar);
+  bar.classList.add('show');
+
+  var status=bar.querySelector('#aStatus');
+  var pwdInput=bar.querySelector('#aPwd');
+  var btnEdit=bar.querySelector('#aEdit');
+  var btnSave=bar.querySelector('#aSave');
+  var btnCancel=bar.querySelector('#aCancel');
+
+  /* Stop FAQ/tab click handlers from firing while editing so clicks place the cursor. */
+  document.querySelectorAll('.fq').forEach(function(q){
+    q.addEventListener('click',function(e){ if(editing) e.stopImmediatePropagation(); },true);
+  });
+
+  function setEditable(on){
+    document.querySelectorAll(EDITABLE).forEach(function(el){
+      if(on) el.setAttribute('contenteditable','true');
+      else   el.removeAttribute('contenteditable');
+    });
+    document.body.classList.toggle('admin-editing',on);
+  }
+
+  function enterEdit(){
+    pwd=pwdInput.value;
+    if(!pwd){ status.textContent='Enter the password first'; pwdInput.focus(); return; }
+    editing=true; setEditable(true);
+    btnEdit.style.display='none'; pwdInput.style.display='none';
+    btnSave.style.display=''; btnCancel.style.display='';
+    status.textContent='Editing — click any text to change it';
+  }
+  function exitEdit(reload){
+    editing=false; setEditable(false);
+    btnEdit.style.display=''; pwdInput.style.display='';
+    btnSave.style.display='none'; btnCancel.style.display='none';
+    if(reload) location.reload();
+  }
+
+  function serialize(){
+    var clone=document.documentElement.cloneNode(true);
+    clone.querySelectorAll('[contenteditable]').forEach(function(el){el.removeAttribute('contenteditable');});
+    var bd=clone.querySelector('body'); if(bd) bd.classList.remove('admin-editing');
+    var ab=clone.querySelector('#adminBar'); if(ab&&ab.parentNode) ab.parentNode.removeChild(ab);
+    return '<!DOCTYPE html>\n'+clone.outerHTML;
+  }
+
+  function save(){
+    status.textContent='Saving…'; btnSave.disabled=true;
+    fetch('/api/save',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({password:pwd, html:serialize()})
+    })
+    .then(function(r){ return r.json().then(function(j){ return {ok:r.ok,j:j}; }); })
+    .then(function(res){
+      btnSave.disabled=false;
+      if(res.ok){ status.textContent='✓ Saved! Live for everyone in ~30s.'; exitEdit(false); }
+      else { status.textContent='Error: '+((res.j&&res.j.error)||'save failed'); }
+    })
+    .catch(function(err){ btnSave.disabled=false; status.textContent='Network error: '+err.message; });
+  }
+
+  btnEdit.addEventListener('click',enterEdit);
+  btnSave.addEventListener('click',save);
+  btnCancel.addEventListener('click',function(){ exitEdit(true); });
+})();
 </script>
 </body>
 </html>

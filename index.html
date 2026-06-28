@@ -115,10 +115,10 @@ body{font-family:'Inter',sans-serif;background:#f5f4f0;color:#1a1a18;line-height
 body.admin-editing{padding-bottom:60px}
 body.admin-editing [contenteditable="true"]{outline:1.5px dashed rgba(26,106,177,.5);outline-offset:2px;border-radius:3px;cursor:text}
 body.admin-editing [contenteditable="true"]:hover{outline-color:rgba(26,106,177,.85)}
-body.admin-editing [contenteditable="true"]:focus{outline:2px solid #1a6ab1;background:#fffdf2}
+body.admin-editing [contenteditable="true"]:focus{outline:2px solid #1a6ab1;outline-offset:2px;background:rgba(26,106,177,.18)}
 body.admin-editing .fi .fa{display:block !important}
-body.admin-editing .admin-img{cursor:pointer;outline:2px dashed rgba(26,106,177,.6);outline-offset:-2px;position:relative}
-body.admin-editing .admin-img:hover{outline:2px solid #1a6ab1}
+body.admin-editing .admin-imgbox{cursor:pointer;outline:2px dashed rgba(26,106,177,.7);outline-offset:-2px}
+body.admin-editing .admin-imgbox:hover{outline:2px solid #1a6ab1}
 #adminImgModal{position:fixed;inset:0;z-index:100000;background:rgba(8,18,36,.66);display:none;align-items:center;justify-content:center;padding:18px;font-family:'Inter',sans-serif}
 #adminImgModal.show{display:flex}
 #adminImgModal .aim-box{background:#fff;border-radius:14px;width:100%;max-width:440px;padding:20px;box-shadow:0 18px 50px rgba(0,0,0,.35)}
@@ -1424,8 +1424,8 @@ function tf(el){
     '.tip','.warn','.good','.red'
   ].join(',');
 
-  /* Images that can be swapped by pasting a new URL. */
-  var IMG_EDITABLE = ['.hero-img','.dest-banner img','.pcard img'].join(',');
+  /* Image containers — clicking anywhere on them (overlay included) opens the picker. */
+  var IMG_BOXES = ['.hero','.dest-banner','.pcard'].join(',');
 
   var pwd=null, editing=false;
 
@@ -1493,10 +1493,13 @@ function tf(el){
     q.addEventListener('click',function(e){ if(editing) e.stopImmediatePropagation(); },true);
   });
 
-  /* Clicking an image while editing opens the picker. */
-  document.querySelectorAll(IMG_EDITABLE).forEach(function(img){
-    img.addEventListener('click',function(e){
+  /* Clicking an image area while editing opens the picker (but text clicks pass through). */
+  document.querySelectorAll(IMG_BOXES).forEach(function(box){
+    var img=box.querySelector('img');
+    if(!img) return;
+    box.addEventListener('click',function(e){
       if(!editing) return;
+      if(e.target.closest('[contenteditable="true"]')) return; // let text editing happen
       e.preventDefault(); e.stopImmediatePropagation();
       openImgEditor(img);
     },true);
@@ -1507,9 +1510,10 @@ function tf(el){
       if(on) el.setAttribute('contenteditable','true');
       else   el.removeAttribute('contenteditable');
     });
-    document.querySelectorAll(IMG_EDITABLE).forEach(function(img){
-      if(on) img.classList.add('admin-img');
-      else   img.classList.remove('admin-img');
+    document.querySelectorAll(IMG_BOXES).forEach(function(box){
+      if(!box.querySelector('img')) return;
+      if(on) box.classList.add('admin-imgbox');
+      else   box.classList.remove('admin-imgbox');
     });
     document.body.classList.toggle('admin-editing',on);
   }
@@ -1532,7 +1536,7 @@ function tf(el){
   function serialize(){
     var clone=document.documentElement.cloneNode(true);
     clone.querySelectorAll('[contenteditable]').forEach(function(el){el.removeAttribute('contenteditable');});
-    clone.querySelectorAll('.admin-img').forEach(function(el){el.classList.remove('admin-img');});
+    clone.querySelectorAll('.admin-imgbox').forEach(function(el){el.classList.remove('admin-imgbox');});
     var bd=clone.querySelector('body'); if(bd) bd.classList.remove('admin-editing');
     var ab=clone.querySelector('#adminBar'); if(ab&&ab.parentNode) ab.parentNode.removeChild(ab);
     var im=clone.querySelector('#adminImgModal'); if(im&&im.parentNode) im.parentNode.removeChild(im);

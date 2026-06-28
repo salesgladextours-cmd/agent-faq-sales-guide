@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travel Sales & FAQ Guide 2026</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#f5f4f0;color:#1a1a18;line-height:1.65;font-size:15px}
+.hero{position:relative;height:300px;overflow:hidden;display:flex;align-items:flex-end}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,18,36,0.95) 0%,rgba(8,18,36,0.45) 55%,rgba(8,18,36,0.1) 100%)}
+.hero-content{position:relative;z-index:2;padding:0 40px 36px;width:100%}
+.hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:8px}
+.hero h1{font-family:'Playfair Display',Georgia,serif;font-size:36px;font-weight:800;color:#fff;line-height:1.15;letter-spacing:-0.02em}
+.hero-sub{font-size:13px;color:rgba(255,255,255,0.6);margin-top:8px}
+.tab-nav{display:flex;background:#fff;border-bottom:1.5px solid #e2dfd5;overflow-x:auto;scrollbar-width:none;padding:0 24px;position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,0.06)}
+.tab-nav::-webkit-scrollbar{display:none}
+.tab-btn{flex-shrink:0;padding:15px 16px 13px;font-size:13px;font-weight:500;color:#7a7870;border:none;background:transparent;border-bottom:2.5px solid transparent;margin-bottom:-1.5px;cursor:pointer;transition:color .15s,border-color .15s;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.tab-btn:hover{color:#1a2e4a}
+.tab-btn.active{color:#1a2e4a;border-bottom-color:#1a6ab1;font-weight:700}
+.content{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+.destination{display:none}
+.destination.active{display:block}
+
+/* DEST BANNER */
+.dest-banner{position:relative;height:220px;border-radius:16px;overflow:hidden;margin-bottom:26px}
+.dest-banner img{width:100%;height:100%;object-fit:cover;object-position:center 40%}
+.dest-overlay{position:absolute;inset:0;background:linear-gradient(120deg,rgba(8,18,36,0.82) 0%,rgba(8,18,36,0.25) 100%)}
+.dest-text{position:absolute;bottom:0;left:0;right:0;padding:22px 26px}
+.dest-text h2{font-family:'Playfair Display',serif;font-size:26px;font-weight:800;color:#fff;margin-bottom:3px}
+.dest-text p{font-size:12px;color:rgba(255,255,255,0.7)}
+.dtags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.dtag{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.28)}
+
+/* PHOTO GRID */
+.photos-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#8a8780;margin:24px 0 10px;display:flex;align-items:center;gap:8px}
+.photos-title::after{content:'';flex:1;height:1px;background:#e2dfd5}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:26px}
+.pgrid-2{grid-template-columns:repeat(2,1fr)}
+.pcard{position:relative;border-radius:10px;overflow:hidden;height:138px}
+.pcard img{width:100%;height:100%;object-fit:cover;transition:transform .35s}
+.pcard:hover img{transform:scale(1.07)}
+.pcard-lbl{position:absolute;bottom:0;left:0;right:0;padding:7px 9px;background:linear-gradient(to top,rgba(0,0,0,0.78),transparent);color:#fff;font-size:10.5px;font-weight:600}
+.pcard-tall{height:175px}
+
+/* RATES */
+.rates{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:7px;margin-bottom:26px}
+.rcard{background:#fff;border:1px solid #e2dfd5;border-radius:9px;padding:11px 13px;text-align:center}
+.rl{font-size:9.5px;color:#9a9890;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+.rv{font-size:16px;font-weight:800;color:#1a2e4a}
+.rs{font-size:9.5px;color:#9a9890;margin-top:2px}
+
+/* FAQ */
+.faq-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#8a8780;margin:26px 0 10px;display:flex;align-items:center;gap:8px}
+.faq-title::after{content:'';flex:1;height:1px;background:#e2dfd5}
+.fi{background:#fff;border:1px solid #e2dfd5;border-radius:10px;margin-bottom:6px;overflow:hidden;transition:border-color .15s}
+.fi:hover{border-color:#b8b5ac}
+.fi.open{border-color:#1a6ab1}
+.fq{display:flex;align-items:flex-start;gap:10px;padding:13px 16px;cursor:pointer;user-select:none}
+.fnum{font-size:10.5px;font-weight:800;color:#1a6ab1;min-width:20px;margin-top:2px}
+.fqt{font-size:13.5px;font-weight:600;color:#1a1a18;flex:1;line-height:1.4}
+.fico{width:21px;height:21px;border-radius:50%;background:#f0ede6;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .2s,background .15s;font-size:15px;color:#5a5850;margin-top:1px;line-height:1}
+.fi.open .fico{transform:rotate(45deg);background:#1a2e4a;color:#fff}
+.fa{display:none;padding:0 16px 15px 46px;font-size:13px;color:#46443c;line-height:1.78}
+.fi.open .fa{display:block}
+.fa ul{padding-left:16px}
+.fa li{margin-bottom:5px}
+.fa strong{color:#1a1a18;font-weight:600}
+.tip{background:#eef5ff;border-left:3px solid #1a6ab1;padding:9px 12px;border-radius:0 7px 7px 0;margin-top:10px;font-size:12.5px;color:#1a3a6a}
+.warn{background:#fffbea;border-left:3px solid #e8a020;padding:9px 12px;border-radius:0 7px 7px 0;margin-top:10px;font-size:12.5px;color:#7a4800}
+.good{background:#edfaf3;border-left:3px solid #1a9a50;padding:9px 12px;border-radius:0 7px 7px 0;margin-top:10px;font-size:12.5px;color:#0d5c28}
+.red{background:#fff0f0;border-left:3px solid #cc2a2a;padding:9px 12px;border-radius:0 7px 7px 0;margin-top:10px;font-size:12.5px;color:#7a1010}
+
+/* ARRIVAL CARD */
+.acard{background:#edfaf3;border:1.5px solid #7fd4a8;border-radius:14px;padding:18px 22px;margin-top:28px}
+.acard h3{font-size:13.5px;font-weight:700;color:#0d5c28;margin-bottom:12px}
+.acard ul{list-style:none;padding:0}
+.acard li{display:flex;gap:10px;font-size:12.5px;color:#1a5038;padding:6px 0;border-bottom:1px solid rgba(127,212,168,0.32)}
+.acard li:last-child{border:none;padding-bottom:0}
+.sdot{width:21px;height:21px;border-radius:50%;background:#1a7a40;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.acard a{color:#1a5a96;text-decoration:underline;word-break:break-all}
+
+/* MONTH BADGE GRID */
+.month-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin:10px 0}
+.mb{text-align:center;padding:6px 4px;border-radius:6px;font-size:10px;font-weight:600}
+.mb-best{background:#d4f4e2;color:#0d5c28}
+.mb-good{background:#e8f4ff;color:#1a3a6a}
+.mb-peak{background:#fff0d0;color:#7a4800}
+.mb-hot{background:#ffe4e4;color:#7a1010}
+.mb label{display:block;font-size:9px;font-weight:400;margin-top:2px;opacity:.8}
+
+@media(max-width:640px){
+  .hero{height:240px}.hero h1{font-size:24px}.hero-content{padding:0 18px 26px}
+  .content{padding:18px 12px 60px}
+  .pgrid{grid-template-columns:repeat(2,1fr)}
+  .tab-btn{padding:12px 11px 10px;font-size:11.5px}
+  .month-grid{grid-template-columns:repeat(4,1fr)}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1531259683007-016a7b628fc3?w=1400&q=80" alt="Asia travel destinations">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">B2B Land Arrangement · Sales & FAQ Guide · 2026</div>
+    <h1>Asia Travel Guide<br>for Agents</h1>
+    <p class="hero-sub">Rates, inclusions, best travel months, what to bring, fees, and arrival requirements — everything you need to close the sale.</p>
+  </div>
+</div>
+
+<nav class="tab-nav" role="tablist">
+  <button class="tab-btn active" onclick="go('sg')">🇸🇬 Singapore</button>
+  <button class="tab-btn" onclick="go('vn')">🇻🇳 Vietnam HCM</button>
+  <button class="tab-btn" onclick="go('da')">🇻🇳 Da Nang</button>
+  <button class="tab-btn" onclick="go('jp')">🇯🇵 Japan</button>
+  <button class="tab-btn" onclick="go('hk')">🇭🇰 Hong Kong</button>
+</nav>
+
+<div class="content">
+
+<!-- ══════════ SINGAPORE ══════════ -->
+<section class="destination active" id="sg">
+  <div class="dest-banner">
+    <img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=900&q=80" alt="Singapore Marina Bay Sands skyline">
+    <div class="dest-overlay"></div>
+    <div class="dest-text">
+      <h2>Singapore</h2>
+      <p>Changi International Airport (SIN) · Validity: Until December 2026</p>
+      <div class="dtags">
+        <span class="dtag">Visa-free for Filipinos</span>
+        <span class="dtag">3D2N & 4D3N packages</span>
+        <span class="dtag">Budget to 5-star hotels</span>
+        <span class="dtag">USS & City Tour included</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="photos-title">Attractions Clients Will Visit</div>
+  <div class="pgrid">
+    <div class="pcard pcard-tall">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Merlion%2C_Singapore%2C_with_Marina_Bay_Sands_in_the_background.jpg/1200px-Merlion%2C_Singapore%2C_with_Marina_Bay_Sands_in_the_background.jpg" alt="Merlion Park Singapore">
+      <div class="pcard-lbl">Merlion Park — City Tour photo stop</div>
+    </div>
+    <div class="pcard pcard-tall">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Sg_gardensbythebay_supertrees.jpg/1200px-Sg_gardensbythebay_supertrees.jpg" alt="Gardens by the Bay Supertrees Singapore">
+      <div class="pcard-lbl">Gardens by the Bay — Supertrees</div>
+    </div>
+    <div class="pcard">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/USS_Globe_2011.jpg/800px-USS_Globe_2011.jpg" alt="Universal Studios Singapore globe">
+      <div class="pcard-lbl">Universal Studios Singapore</div>
+    </div>
+    <div class="pcard">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Singapore_Night_Safari.jpg/1200px-Singapore_Night_Safari.jpg" alt="Singapore Night Safari">
+      <div class="pcard-lbl">Night Safari</div>
+    </div>
+    <div class="pcard">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/SentosaCableCarStation_2.jpg/1200px-SentosaCableCarStation_2.jpg" alt="Sentosa Cable Car Singapore">
+      <div class="pcard-lbl">Sentosa Cable Car</div>
+    </div>
+    <div class="pcard">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Singapore_Chinatown_Thian_Hock_Keng_2018.jpg/1200px-Singapore_Chinatown_Thian_Hock_Keng_2018.jpg" alt="Thian Hock Keng Temple Chinatown Singapore">
+      <div class="pcard-lbl">Thian Hock Keng — Chinatown</div>
+    </div>
+  </div>
+
+  <div class="rates">
+    <div class="rcard"><div class="rl">3D2N Twin 2★</div><div class="rv">₱8,899</div><div class="rs">Budget hotels</div></div>
+    <div class="rcard"><div class="rl">3D2N Twin 3★A</div><div class="rv">₱12,299</div><div class="rs">Ibis Clarke Quay</div></div>
+    <div class="rcard"><div class="rl">3D2N Twin 3★B</div><div class="rv">₱13,299</div><div class="rs">Ibis Novena area</div></div>
+    <div class="rcard"><div class="rl">3D2N Twin 4★</div><div class="rv">₱18,599</div><div class="rs">York / Mercure</div></div>
+    <div class="rcard"><div class="rl">3D2N Twin 5★</div><div class="rv">₱19,699</div><div class="rs">Orchard / Grand Copthorne</div></div>
+    <div class="rcard"><div class="rl">4D3N + USS 2★</div><div class="rv">₱16,699</div><div class="rs">Twin sharing</div></div>
+  </div>
+
+  <div class="faq-title">Frequently Asked Questions</div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">01</span><span class="fqt">What are the two Singapore packages and what is included?</span><span class="fico">+</span></div>
+    <div class="fa">
+      <strong>Package 1 – 3D2N with Half-Day City Tour:</strong> 2-night hotel stay, daily breakfast (except budget 2★), round-trip airport transfers (SIC), and a compulsory 3-hour half-day city tour on Day 2. Available in Budget 2★ up to 5★.<br><br>
+      <strong>Package 2 – 4D3N with USS + Half-Day City Tour:</strong> Same as Package 1 but with an extra night and a full day at Universal Studios Singapore on Day 3, including 2-way hotel transfers to USS.
+      <div class="tip">Sales tip: Package 2 is great value — USS as a standalone optional tour costs ₱6,150/pax, but bundled into the 4D3N package the incremental cost per pax is much lower, especially in 5★ hotels.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">02</span><span class="fqt">What is the best month to visit Singapore?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Singapore has a tropical climate with heat and occasional rain year-round. The most comfortable months:
+      <div class="month-grid">
+        <div class="mb mb-best">Feb<label>Best</label></div>
+        <div class="mb mb-best">Mar<label>Best</label></div>
+        <div class="mb mb-good">Apr<label>Good</label></div>
+        <div class="mb mb-good">May<label>Good</label></div>
+        <div class="mb mb-good">Jun<label>Good</label></div>
+        <div class="mb mb-good">Jul<label>Good</label></div>
+        <div class="mb mb-good">Aug<label>Good</label></div>
+        <div class="mb mb-good">Sep<label>Good</label></div>
+        <div class="mb mb-peak">Oct<label>F1 Peak</label></div>
+        <div class="mb mb-good">Nov<label>Good</label></div>
+        <div class="mb mb-hot">Dec<label>BTS Peak</label></div>
+        <div class="mb mb-peak">Jan<label>CNY</label></div>
+      </div>
+      <ul>
+        <li><strong>Feb–Mar:</strong> Lowest rainfall, pleasant weather. Great for outdoor attractions like Gardens by the Bay and Sentosa.</li>
+        <li><strong>Jun–Sep:</strong> Dry and warm, excellent for sightseeing. School holidays in June mean busy theme parks.</li>
+        <li><strong>Avoid Oct & Dec if budget-sensitive:</strong> Formula 1 (Oct) and BTS Concert (Dec 16–26) bring heavy surcharges.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">03</span><span class="fqt">What fees and surcharges should clients budget for BEYOND the package price?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Always present clients with a complete cost breakdown. On top of the package rate, they need to budget for:
+      <ul>
+        <li><strong>Compulsory travel insurance:</strong> ₱419 (age 6 months–75 yrs) / ₱688 (76–80) / ₱957 (81–85)</li>
+        <li><strong>Fuel surcharge (mandatory):</strong> ₱325/pax (twin/triple) or ₱650/pax (single)</li>
+        <li><strong>Philippine Travel Tax:</strong> ₱1,670 per pax — paid at the TIEZA counter at PH departure airport</li>
+        <li><strong>Midnight surcharge</strong> (flights 10 PM–6 AM): ₱819/pax twin sharing or ₱1,638/pax solo</li>
+        <li><strong>Peak/event surcharges:</strong> Varies by date (Fri/Sat, F1, BTS, NYE). Confirm with POTB.</li>
+        <li><strong>Hotel security deposit:</strong> Paid directly at hotel on check-in (refundable upon check-out)</li>
+        <li><strong>Optional tours:</strong> Budget ₱1,800–₱9,240/pax depending on chosen activities</li>
+        <li><strong>Personal expenses:</strong> Meals not in package, shopping, transport within city</li>
+      </ul>
+      <div class="warn">All package rates are EXCLUSIVE of tax. Never quote the package price as the final all-in amount.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">04</span><span class="fqt">What should clients pack and bring to Singapore?</span><span class="fico">+</span></div>
+    <div class="fa">
+      <strong>Clothing:</strong>
+      <ul>
+        <li>Light, breathable clothes (tropical heat, 28–33°C year-round)</li>
+        <li>Light jacket or cardigan — malls and MRT are heavily air-conditioned</li>
+        <li>Comfortable walking shoes — lots of walking especially at Gardens by the Bay and Sentosa</li>
+        <li>Modest clothing for temple visits (Thian Hock Keng — cover shoulders and knees)</li>
+        <li>Light rain jacket or compact umbrella — afternoon showers are common</li>
+      </ul>
+      <strong>Documents & essentials:</strong>
+      <ul>
+        <li>Philippine passport (valid 6+ months from departure date)</li>
+        <li>Return / onward flight ticket</li>
+        <li>Hotel booking confirmation</li>
+        <li>Printed or digital travel voucher from POTB</li>
+        <li>Travel insurance certificate</li>
+        <li>Cash in SGD and/or credit card (Singapore is very cashless-friendly)</li>
+      </ul>
+      <div class="tip">Singapore dollars (SGD) are widely available at Philippine airport money changers. Current rate: approximately ₱42–45 per SGD. Advise clients to exchange before departure.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">05</span><span class="fqt">Are there arrival card requirements for entering Singapore?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Yes — two digital registrations are required:
+      <ul>
+        <li><strong>SG Arrival Card (SGAC):</strong> Must be completed within 3 days before arrival at Singapore. Free to fill out at <strong>eservices.ica.gov.sg/sgarrival-card</strong>. This replaces the old paper disembarkation card.</li>
+        <li><strong>PH e-Travel Registration:</strong> All Filipino passengers must register at <strong>etravel.gov.ph</strong> within 72 hours before departing from the Philippines.</li>
+      </ul>
+      <div class="warn">Clients who forget to fill the SG Arrival Card may be asked to complete it at the airport, causing delays. Remind them to do it on their phone 1–3 days before travel.</div>
+      Filipinos enjoy visa-free entry to Singapore. No visa required.
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">06</span><span class="fqt">What are the peak season surcharges and which event dates to avoid?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Surcharges apply on top of base rates during:
+      <ul>
+        <li><strong>Jun 18–22:</strong> HerbaLife Convention</li>
+        <li><strong>Oct 8–11:</strong> Formula 1 Singapore Grand Prix — one of the highest surcharge periods</li>
+        <li><strong>Oct 21–23:</strong> ITB Asia travel trade show</li>
+        <li><strong>Dec 16–26:</strong> BTS Concert — significant hotel price spike</li>
+        <li><strong>Dec 30–31:</strong> New Year celebrations</li>
+      </ul>
+      <div class="warn">Never quote confirmed pricing for these dates without checking with POTB first. Surcharge amounts vary by hotel and event. Some peak periods can add ₱2,000–₱5,000+ per pax.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">07</span><span class="fqt">What optional tours can clients add, and what are the prices?</span><span class="fico">+</span></div>
+    <div class="fa">
+      SIC / Joiner tours (minimum 2 pax):
+      <ul>
+        <li>Gardens by the Bay – Cloud Forest + Jurassic World + Flower Dome: <strong>₱3,380 adult / ₱2,870 child</strong></li>
+        <li>Bird Paradise: <strong>₱4,070 adult / ₱3,380 child</strong></li>
+        <li>Night Safari (no dinner): <strong>₱4,260 adult / ₱3,500 child</strong></li>
+        <li>Singapore Zoo: <strong>₱4,070 adult / ₱3,380 child</strong></li>
+        <li>Bird Paradise + Night Safari combo: <strong>₱6,720 adult / ₱5,270 child</strong></li>
+        <li>Universal Studios (1-day pass + 2-way transfers): <strong>₱6,150 adult / ₱5,270 child</strong></li>
+        <li>Sentosa (Cable Car + 4D Adventureland + Luge + Wings of Time): <strong>₱7,660 adult / ₱7,350 child</strong></li>
+        <li>Sentosa Fun Discovery Pass 120 tokens + Cable Car: <strong>₱9,240 adult / ₱8,990 child</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">08</span><span class="fqt">What is the cancellation and no-show policy?</span><span class="fico">+</span></div>
+    <div class="fa">
+      <ul>
+        <li>Cancellations must be made at least <strong>3 days before pick-up time</strong> — otherwise full transfer fare is charged</li>
+        <li>No-show or leaving airport without calling = <strong>full fare charged</strong></li>
+        <li>Any unused portion is <strong>non-refundable</strong></li>
+        <li>For late-night/early-morning flights (10 PM–6 AM): midnight surcharge of ₱819/pax (twin) or ₱1,638/pax (solo)</li>
+        <li>Departure pick-up: fixed at <strong>4 hours before flight time</strong></li>
+        <li>Maximum waiting time at pick-up: <strong>15 minutes</strong></li>
+      </ul>
+      <div class="warn">Always remind clients to call the POTB hotline immediately if there are flight delays or changes. Being proactive avoids unnecessary charges.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">09</span><span class="fqt">What are the hotel tiers and how should I choose for my client?</span><span class="fico">+</span></div>
+    <div class="fa">
+      <ul>
+        <li><strong>Budget 2★ (Hotel 81, Orchid, Fragrance):</strong> ₱8,899 — No breakfast included. Weekday rate only. Great for budget-conscious clients who plan to be out exploring all day.</li>
+        <li><strong>3★ A (Ibis Budget Clarke Quay/Imperial/Selegie):</strong> ₱12,299 — With breakfast. Near Clarke Quay nightlife and Marina Bay area.</li>
+        <li><strong>3★ B (Ibis Novena, Hotel Royal, Ibis Style Albert):</strong> ₱13,299 — Slightly better location, near Orchard Road shopping belt.</li>
+        <li><strong>4★ (York Hotel Orchard, Mercure Bugis):</strong> ₱18,599 — Comfortable, great location. Ideal for families and corporate clients.</li>
+        <li><strong>5★ (Orchard Hotel, Grand Copthorne Waterfront):</strong> ₱19,699 — Premium experience near Orchard Road or river.</li>
+      </ul>
+      <div class="good">The jump from 2★ to 3★ is only about ₱3,400/pax and includes breakfast — usually worth it! Push the 3★ minimum for first-time Singapore visitors.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">10</span><span class="fqt">What local tips and reminders should I share with clients before they depart?</span><span class="fico">+</span></div>
+    <div class="fa">
+      <ul>
+        <li><strong>No chewing gum</strong> — banned in Singapore. Customs may confiscate it on arrival.</li>
+        <li><strong>No durian in MRT or taxis</strong> — strictly prohibited and fined.</li>
+        <li><strong>Jaywalking is illegal</strong> — use crossings. Fines are real.</li>
+        <li><strong>Littering = heavy fine.</strong> Keep it clean.</li>
+        <li><strong>Hawker centres</strong> are the best value food option — Lau Pa Sat, Maxwell Food Centre, and Old Airport Road are popular.</li>
+        <li><strong>MRT is the easiest way to get around</strong> — buy an EZ-Link card (approx SGD 10 including SGD 5 credit) at any MRT station upon arrival.</li>
+        <li><strong>Tap water is safe to drink.</strong></li>
+        <li><strong>Weather:</strong> Expect afternoon thundershowers especially in Oct–Dec. Bring an umbrella.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">11</span><span class="fqt">Are children rates different? What about infants?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Children aged 3–6 (no extra bed) have their own rate, typically ₱4,599–₱8,399 per package depending on hotel tier. A <strong>Child ABF (Allowance for Breakfast)</strong> add-on is available per night:
+      <ul>
+        <li>Budget 2★: ₱1,300/night | 3★ A: ₱1,300 | 3★ B: ₱1,400 | 4★: ₱1,600 | 5★: ₱1,900</li>
+      </ul>
+      <div class="warn">Child rates and exact age brackets are subject to confirmation per travel date. Always verify with POTB before quoting.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">12</span><span class="fqt">What is the fuel surcharge and when can it change?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Fuel surcharge is <strong>mandatory</strong> and separate from the package rate:
+      <ul>
+        <li>Single room: <strong>₱650 per package / per person</strong></li>
+        <li>Twin/Triple sharing: <strong>₱325 per package / per person</strong></li>
+      </ul>
+      <div class="warn">Fuel surcharge rates are subject to change without prior notice. Always confirm the current rate with the POTB team before finalizing any client quotation. Do not assume the rate is the same as a previous booking.</div>
+    </div>
+  </div>
+
+  <div class="acard">
+    <h3>✈️ Singapore — Complete Pre-Travel Checklist</h3>
+    <ul>
+      <li><span class="sdot">1</span><span><strong>PH e-Travel</strong> — Register at <a href="https://etravel.gov.ph">etravel.gov.ph</a> within 72 hours before departure from the Philippines.</span></li>
+      <li><span class="sdot">2</span><span><strong>SG Arrival Card (SGAC)</strong> — Fill up at <a href="https://eservices.ica.gov.sg/sgarrival-card">eservices.ica.gov.sg/sgarrival-card</a> within 3 days before arriving in Singapore.</span></li>
+      <li><span class="sdot">3</span><span><strong>Passport validity</strong> — At least 6 months beyond departure date. No visa needed for Filipinos.</span></li>
+      <li><span class="sdot">4</span><span><strong>Budget for extras</strong> — Travel insurance + fuel surcharge + PH travel tax (₱1,670) + optional tours + hotel security deposit.</span></li>
+      <li><span class="sdot">5</span><span><strong>Exchange currency</strong> — Get SGD before departure. Bring credit card as backup. Singapore is very cashless-friendly.</span></li>
+      <li><span class="sdot">6</span><span><strong>Travel voucher</strong> — Issued 10–15 working days before travel. Groups: at least 3 days before.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════ VIETNAM HCM ══════════ -->
+<section class="destination" id="vn">
+  <div class="dest-banner">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Ho_Chi_Minh_City_%28Bitexco_Financial_Tower%29.jpg/1200px-Ho_Chi_Minh_City_%28Bitexco_Financial_Tower%29.jpg" alt="Ho Chi Minh City Saigon skyline Bitexco Tower">
+    <div class="dest-overlay"></div>
+    <div class="dest-text">
+      <h2>Vietnam – Ho Chi Minh City</h2>
+      <p>Tan Son Nhat International Airport (SGN) · Valid until December 2026</p>
+      <div class="dtags">
+        <span class="dtag">3D2N Free & Easy</span>
+        <span class="dtag">Private transfers</span>
+        <span class="dtag">3★ to 4★ Hotels</span>
+        <span class="dtag">Pre-Arrival Form Required</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="photos-title">Attractions Clients Will Visit</div>
+  <div class="pgrid">
+    <div class="pcard pcard-tall">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Cu_Chi_Tunnels.jpg/1200px-Cu_Chi_Tunnels.jpg" alt="Cu Chi Tunnels Vietnam underground">
+      <div class="pcard-lbl">Cu Chi Tunnels — underground war history</div>
+    </div>
+    <div class="pcard pcard-tall">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Mekong_Delta_region.jpg/1200px-Mekong_Delta_region.jpg" alt="Mekong Delta Vietnam river boat">
+      <div class="pcard-lbl">Mekong Delta — river cruise & villages</div>
+    </div>
+    <div class="pcard">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Ho_Chi_Minh_City_Hall.jpg/1200px-Ho_Chi_Minh_City_Hall.jpg" alt="Ho Chi Minh City Hall colonial architecture">
+      <div class="pcard-lbl">Saigon City Hall — Colonial Architecture</div>
+    </div>
+    <div class="pcard">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Notre-Dame_Cathedral_Basilica_of_Saigon_2.jpg/800px-Notre-Dame_Cathedral_Basilica_of_Saigon_2.jpg" alt="Notre Dame Cathedral Saigon Ho Chi Minh City">
+      <div class="pcard-lbl">Notre Dame Cathedral Basilica</div>
+    </div>
+    <div class="pcard">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Ben_Thanh_market%2C_Ho_Chi_Minh_City%2C_Vietnam.jpg/1200px-Ben_Thanh_market%2C_Ho_Chi_Minh_City%2C_Vietnam.jpg" alt="Ben Thanh Market Ho Chi Minh City">
+      <div class="pcard-lbl">Ben Thanh Market</div>
+    </div>
+    <div class="pcard">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/War_Remnants_Museum_HCMC.jpg/1200px-War_Remnants_Museum_HCMC.jpg" alt="War Remnants Museum Ho Chi Minh City Vietnam">
+      <div class="pcard-lbl">War Remnants Museum</div>
+    </div>
+  </div>
+
+  <div class="rates">
+    <div class="rcard"><div class="rl">Twin 3★ Happy Life</div><div class="rv">₱6,599</div><div class="rs">Peak 2026</div></div>
+    <div class="rcard"><div class="rl">Twin 3★ Acnos</div><div class="rv">₱7,999</div><div class="rs">Peak 2026</div></div>
+    <div class="rcard"><div class="rl">Twin 4★A Odys</div><div class="rv">₱9,099</div><div class="rs">Peak 2026</div></div>
+    <div class="rcard"><div class="rl">Twin 4★B Eden Star</div><div class="rv">₱9,599</div><div class="rs">Peak 2026</div></div>
+    <div class="rcard"><div class="rl">Solo 4★B Eden Star</div><div class="rv">₱16,999</div><div class="rs">Peak 2026</div></div>
+  </div>
+
+  <div class="faq-title">Frequently Asked Questions</div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">01</span><span class="fqt">What is the best month to visit Ho Chi Minh City?</span><span class="fico">+</span></div>
+    <div class="fa">
+      HCMC has two seasons — dry (Dec–Apr) and wet (May–Nov). Best travel months:
+      <div class="month-grid">
+        <div class="mb mb-hot">Jan<label>Tet Peak</label></div>
+        <div class="mb mb-best">Feb<label>Best</label></div>
+        <div class="mb mb-best">Mar<label>Best</label></div>
+        <div class="mb mb-best">Apr<label>Best</label></div>
+        <div class="mb mb-good">May<label>Good</label></div>
+        <div class="mb mb-good">Jun<label>Good</label></div>
+        <div class="mb mb-good">Jul<label>Good</label></div>
+        <div class="mb mb-good">Aug<label>Good</label></div>
+        <div class="mb mb-good">Sep<label>Good</label></div>
+        <div class="mb mb-good">Oct<label>Good</label></div>
+        <div class="mb mb-good">Nov<label>Good</label></div>
+        <div class="mb mb-best">Dec<label>Dry Start</label></div>
+      </div>
+      <ul>
+        <li><strong>Feb–Apr (Dry Season):</strong> Best weather. Cool, dry, minimal rain. Perfect for Cu Chi Tunnels and Mekong Delta outdoor activities.</li>
+        <li><strong>May–Nov (Wet Season):</strong> Still very doable — showers are usually short afternoon bursts. Lower crowds and better hotel value.</li>
+        <li><strong>January (Tet / Lunar New Year):</strong> Beautiful festivities but many local businesses close. Peak hotel surcharges.</li>
+        <li><strong>December:</strong> Transitioning to dry season — excellent weather, festive atmosphere.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">02</span><span class="fqt">What fees and extra charges should clients budget for beyond the package?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Complete cost breakdown beyond the package rate:
+      <ul>
+        <li><strong>Compulsory travel insurance:</strong> ₱419 (age 6 months–75) / ₱688 (76–80) / ₱957 (81–85)</li>
+        <li><strong>Philippine Travel Tax:</strong> ₱1,670/pax — paid at TIEZA counter at PH airport before departure</li>
+        <li><strong>Fuel surcharge:</strong> Mandatory, varies by travel date. Confirm with POTB.</li>
+        <li><strong>Mandatory driver & guide tips:</strong> USD 5/pax/day (paid on-site in cash)</li>
+        <li><strong>Optional tours:</strong> ₱2,570–₱4,150/pax for joiner tours; higher for private tours</li>
+        <li><strong>Hotel security deposit:</strong> Paid at hotel on check-in (refundable)</li>
+        <li><strong>Peak season surcharge:</strong> Applies during Tet holidays and major events</li>
+        <li><strong>Personal expenses:</strong> Meals not in package, shopping, local transportation</li>
+      </ul>
+      <div class="warn">All rates are exclusive of tax. The tipping for driver and guide is compulsory and must be paid directly — do not forget to inform clients.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">03</span><span class="fqt">Is there a new Vietnam arrival form requirement?</span><span class="fico">+</span></div>
+    <div class="fa">
+      <strong>Yes — effective April 15, 2026:</strong> All foreign visitors entering Vietnam must complete a <strong>Pre-Arrival Information Submission for Visitors</strong> before arrival.
+      <ul>
+        <li>Submit at least <strong>3 days before arrival</strong></li>
+        <li>Complete online at: <strong>prearrival.immigration.gov.vn/home-page</strong></li>
+        <li>On-site QR code at airport is available but NOT recommended (causes delays)</li>
+      </ul>
+      Additionally, <strong>PH e-Travel registration</strong> at etravel.gov.ph is required within 72 hours before departure from the Philippines.
+      <div class="warn">This is a new requirement from April 2026. Every Vietnam-bound client must complete this. Failure can cause immigration delays or denial of entry.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">04</span><span class="fqt">What should clients pack and bring to Vietnam HCM?</span><span class="fico">+</span></div>
+    <div class="fa">
+      <strong>Clothing:</strong>
+      <ul>
+        <li>Lightweight, breathable cotton clothes — HCMC is hot (28–35°C) and humid</li>
+        <li>Light jacket for overly air-conditioned restaurants and malls</li>
+        <li>Comfortable walking shoes or sandals — streets can be uneven</li>
+        <li>Modest clothing for temple visits (cover shoulders and knees)</li>
+        <li>Compact umbrella or rain poncho (essential May–Nov)</li>
+      </ul>
+      <strong>Documents & essentials:</strong>
+      <ul>
+        <li>Philippine passport (valid 6+ months)</li>
+        <li>Visa or proof of visa exemption</li>
+        <li>Return ticket printout (may be requested at immigration)</li>
+        <li>POTB travel voucher (printed or digital)</li>
+        <li>Cash in USD and/or Vietnamese Dong (VND)</li>
+        <li>Travel insurance certificate</li>
+      </ul>
+      <div class="tip">Bring small USD bills — tips are expected in USD and many shops quote prices in USD. VND is better for street food, local markets, and taxis.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">05</span><span class="fqt">What optional tours are available and which are the best sellers?</span><span class="fico">+</span></div>
+    <div class="fa">
+      <strong>Joiner/SIC tours (per pax):</strong>
+      <ul>
+        <li>Saigon City Tour half-day: <strong>₱2,570</strong> — pick-up 8:00 AM</li>
+        <li>Cu Chi Tunnels half-day: <strong>₱2,820</strong> — pick-up 8:00 AM</li>
+        <li>Cu Chi + City Tour full-day: <strong>₱4,150</strong> — pick-up 8:00 AM</li>
+        <li>Mekong Delta full-day: <strong>₱3,960</strong> — pick-up 8:00 AM</li>
+        <li>Saigon Food Tour 4 hrs: <strong>₱3,640</strong> — pick-up 6:00 AM</li>
+      </ul>
+      <div class="good">Best sellers: Cu Chi + City Tour combo (most popular for first-timers) and the Mekong Delta tour (most memorable experience — clients love the boat rides and local village stops).</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">06</span><span class="fqt">Are private tours available? How do they compare to joiner tours?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Yes! Private tours are available per group size (per pax):
+      <ul>
+        <li>Saigon City Tour: 2 pax = ₱4,520 | 5 pax = ₱3,580 | 9 pax = ₱3,390</li>
+        <li>Cu Chi Tunnels: 2 pax = ₱4,590 | 5 pax = ₱3,640 | 9 pax = ₱3,520</li>
+        <li>Cu Chi + City: 2 pax = ₱5,030 | 5 pax = ₱4,020 | 9 pax = ₱3,770</li>
+        <li>Mekong Delta: 2 pax = ₱5,280 | 5 pax = ₱3,770 | 9 pax = ₱3,700</li>
+      </ul>
+      Private = dedicated vehicle + more flexible schedule. Joiner = cheaper but fixed schedule with other tourists.
+      <div class="tip">For families with kids or elderly clients, always recommend private tours — more comfortable pace, own vehicle, no waiting for other tourists.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">07</span><span class="fqt">What is NOT included in the package?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Key exclusions to always mention:
+      <ul>
+        <li>Round-trip airfare (POTB can arrange)</li>
+        <li>Compulsory travel insurance</li>
+        <li>Visa arrangement (if applicable)</li>
+        <li>Hotel security deposit</li>
+        <li>Mandatory tips: USD 5/pax/day</li>
+        <li>Laundry, drinks, personal expenses</li>
+        <li>Peak season surcharges</li>
+        <li>Fuel surcharge</li>
+        <li>Optional tours</li>
+        <li>PH Travel Tax ₱1,670</li>
+        <li>All rates exclusive of tax</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">08</span><span class="fqt">Can clients extend their stay with extra nights?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Yes! Extra nights can be added per hotel (twin sharing rate per pax):
+      <ul>
+        <li>3★ Happy Life: <strong>₱2,300/night</strong> | Solo: ₱3,800 | Child (50%): ₱1,200</li>
+        <li>3★ Acnos: <strong>₱2,800/night</strong> | Solo: ₱4,700 | Child: ₱1,400</li>
+        <li>4★A Odys: <strong>₱3,200/night</strong> | Solo: ₱5,700 | Child: ₱1,600</li>
+        <li>4★B Eden Star: <strong>₱3,500/night</strong> | Solo: ₱6,200 | Child: ₱1,800</li>
+      </ul>
+      <div class="tip">An extra night enables clients to take the Mekong Delta tour on one day and the Cu Chi + City Tour on another — maximizing the experience!</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">09</span><span class="fqt">What local tips should I share with clients?</span><span class="fico">+</span></div>
+    <div class="fa">
+      <ul>
+        <li><strong>Traffic is intense</strong> — crossing the street requires confidence. Look for natural gaps in the motorbike flow and walk steadily. Hesitating is more dangerous.</li>
+        <li><strong>Grab is the safest way to get around</strong> — download the app before arrival. Avoid unmarked taxis.</li>
+        <li><strong>Bargaining is expected</strong> at Ben Thanh Market — start at 40–50% of the asking price.</li>
+        <li><strong>Drink only bottled water.</strong> Never drink tap water.</li>
+        <li><strong>Street food is safe and delicious</strong> — look for stalls with lots of locals. Banh mi, pho, and banh xeo are must-tries.</li>
+        <li><strong>Exchange currency</strong> at local gold shops (tiem vang) for best rates, not airport counters. USD is widely accepted.</li>
+        <li><strong>ATMs</strong> are widely available. Notify your bank before travel to avoid card blocks.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">10</span><span class="fqt">What are the lean vs peak seasons and pricing differences?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Rates differ by season:
+      <ul>
+        <li><strong>Lean season (Aug–Dec 2025):</strong> Lower rates — e.g., 3★ Happy Life twin was ₱5,699/pax</li>
+        <li><strong>Peak season (Jan–Dec 2026):</strong> Current rates apply — e.g., 3★ Happy Life twin = ₱6,599/pax</li>
+      </ul>
+      <div class="warn">For travel dates outside the stated validity period, rates are not guaranteed and require fresh quotation from POTB. Never use old rates for new bookings.</div>
+    </div>
+  </div>
+
+  <div class="acard">
+    <h3>✈️ Vietnam HCM — Complete Pre-Travel Checklist</h3>
+    <ul>
+      <li><span class="sdot">1</span><span><strong>PH e-Travel</strong> — Register at <a href="https://etravel.gov.ph">etravel.gov.ph</a> within 72 hours before departure from PH.</span></li>
+      <li><span class="sdot">2</span><span><strong>Vietnam Pre-Arrival Form (NEW – Apr 15, 2026)</strong> — Submit at <a href="https://prearrival.immigration.gov.vn/home-page">prearrival.immigration.gov.vn</a> at least 3 days before arrival. Do not wait until the airport.</span></li>
+      <li><span class="sdot">3</span><span><strong>Passport validity</strong> — At least 6 months beyond travel date. Check current visa requirements for Filipino citizens before booking.</span></li>
+      <li><span class="sdot">4</span><span><strong>PH Travel Tax – ₱1,670</strong> — Paid at the TIEZA counter at the PH departure airport.</span></li>
+      <li><span class="sdot">5</span><span><strong>Cash for tips</strong> — USD 5/pax/day for driver and guide. Bring small USD bills.</span></li>
+      <li><span class="sdot">6</span><span><strong>Travel insurance</strong> — Compulsory, not included in package. ₱419–₱957 depending on age.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════ DANANG ══════════ -->
+<section class="destination" id="da">
+  <div class="dest-banner">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Dragon_Bridge_Da_Nang.jpg/1280px-Dragon_Bridge_Da_Nang.jpg" alt="Dragon Bridge Da Nang Vietnam">
+    <div class="dest-overlay"></div>
+    <div class="dest-text">
+      <h2>Vietnam – Da Nang</h2>
+      <p>Da Nang International Airport (DAD) · Valid until September 2026</p>
+      <div class="dtags">
+        <span class="dtag">3D2N Free & Easy</span>
+        <span class="dtag">Min. 2 Adults Required</span>
+        <span class="dtag">Ba Na Hills Must-Do</span>
+        <span class="dtag">Hoi An & Hue Day Tours</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="photos-title">Attractions Clients Will Visit</div>
+  <div class="pgrid">
+    <div class="pcard pcard-tall">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Golden_Bridge_at_Bana_Hills%2C_Da_Nang%2C_Vietnam.jpg/1200px-Golden_Bridge_at_Bana_Hills%2C_Da_Nang%2C_Vietnam.jpg" alt="Golden Bridge Ba Na Hills Da Nang giant stone hands">
+      <div class="pcard-lbl">Golden Bridge – Ba Na Hills ⭐ #1 Must-Do</div>
+    </div>
+    <div class="pcard pcard-tall">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Hoi_An_Lanterns.jpg/1200px-Hoi_An_Lanterns.jpg" alt="Hoi An Ancient Town lanterns Vietnam">
+      <div class="pcard-lbl">Hoi An Ancient Town — Lantern Night</div>
+    </div>
+    <div class="pcard">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Hue_Ngo_Mon_Gate.jpg/1200px-Hue_Ngo_Mon_Gate.jpg" alt="Hue Imperial City Citadel Vietnam gate">
+      <div class="pcard-lbl">Hue Imperial City</div>
+    </div>
+    <div class="pcard">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Da_Nang_beach.jpg/1200px-Da_Nang_beach.jpg" alt="Da Nang My Khe Beach Vietnam">
+      <div class="pcard-lbl">My Khe Beach Da Nang</div>
+    </div>
+    <div class="pcard">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Marble_Mountains_Da_Nang.jpg/1200px-Marble_Mountains_Da_Nang.jpg" alt="Marble Mountains Da Nang Vietnam">
+      <div class="pcard-lbl">Marble Mountains</div>
+    </div>
+    <div class="pcard">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Japanese_Covered_Bridge_Hoi_An.jpg/1200px-Japanese_Covered_Bridge_Hoi_An.jpg" alt="Japanese Covered Bridge Hoi An Vietnam">
+      <div class="pcard-lbl">Japanese Covered Bridge – Hoi An</div>
+    </div>
+  </div>
+
+  <div class="rates">
+    <div class="rcard"><div class="rl">Twin 3★ Satya Danang</div><div class="rv">₱6,999</div><div class="rs">per pax</div></div>
+    <div class="rcard"><div class="rl">Triple 3★ Satya</div><div class="rv">₱5,999</div><div class="rs">per pax</div></div>
+    <div class="rcard"><div class="rl">Solo 3★ Satya</div><div class="rv">₱11,599</div><div class="rs">per pax</div></div>
+    <div class="rcard"><div class="rl">Twin 4★ Stellar Maris</div><div class="rv">₱7,699</div><div class="rs">per pax</div></div>
+    <div class="rcard"><div class="rl">Solo 4★ Stellar Maris</div><div class="rv">₱12,899</div><div class="rs">per pax</div></div>
+  </div>
+
+  <div class="faq-title">Frequently Asked Questions</div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">01</span><span class="fqt">What is the best month to visit Da Nang?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Da Nang has a distinct dry and wet season. Best months to recommend:
+      <div class="month-grid">
+        <div class="mb mb-good">Jan<label>Dry</label></div>
+        <div class="mb mb-best">Feb<label>Best</label></div>
+        <div class="mb mb-best">Mar<label>Best</label></div>
+        <div class="mb mb-best">Apr<label>Best</label></div>
+        <div class="mb mb-best">May<label>Best</label></div>
+        <div class="mb mb-good">Jun<label>Hot</label></div>
+        <div class="mb mb-good">Jul<label>Hot</label></div>
+        <div class="mb mb-good">Aug<label>Hot</label></div>
+        <div class="mb mb-peak">Sep<label>Typhoon</label></div>
+        <div class="mb mb-hot">Oct<label>Rainy</label></div>
+        <div class="mb mb-hot">Nov<label>Rainy</label></div>
+        <div class="mb mb-good">Dec<label>Cooler</label></div>
+      </div>
+      <ul>
+        <li><strong>Feb–May (Peak of dry season):</strong> Best months. Low rainfall, warm beach weather (27–32°C). Great for Ba Na Hills, beaches, and Hoi An.</li>
+        <li><strong>Jun–Aug:</strong> Very hot (35°C+) but minimal rain. Manageable if clients plan early morning sightseeing.</li>
+        <li><strong>Sep–Nov:</strong> Typhoon and rainy season. Flooding can occur. Not ideal for outdoor activities. Ba Na Hills cable car may be temporarily suspended.</li>
+        <li><strong>Dec–Jan:</strong> Cooler (20–25°C), some rain but manageable. Fewer crowds.</li>
+      </ul>
+      <div class="warn">Note: Da Nang package is valid only until September 2026. For October onwards, new rates apply — check with POTB.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">02</span><span class="fqt">What fees and extra charges should clients budget for?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Complete cost breakdown beyond the package:
+      <ul>
+        <li><strong>Compulsory travel insurance:</strong> ₱419 (6 months–75 yrs) / ₱811 (76–80) / ₱1,141 (81–85)</li>
+        <li><strong>Philippine Travel Tax:</strong> ₱1,670/pax — paid at TIEZA counter at PH airport</li>
+        <li><strong>Fuel surcharge:</strong> Mandatory, varies by travel date. Confirm with POTB.</li>
+        <li><strong>Mandatory driver & guide tips:</strong> USD 8/pax/day (2–4 pax) | USD 6 (5–9 pax) | USD 5 (10–15 pax) | USD 4 (16+ pax)</li>
+        <li><strong>Late/early flight surcharge (9 PM–6 AM):</strong> USD 5 per way per group</li>
+        <li><strong>Optional tours:</strong> ₱1,930–₱4,760/pax depending on tour chosen</li>
+        <li><strong>Hotel security deposit:</strong> Paid at hotel on check-in (refundable)</li>
+        <li><strong>Personal expenses:</strong> Meals not covered, shopping, local transport</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">03</span><span class="fqt">What arrival card or online form requirements are needed for Da Nang?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Two digital requirements:
+      <ul>
+        <li><strong>Vietnam Pre-Arrival Information Submission (NEW – April 15, 2026):</strong> All foreign visitors must complete this online at <strong>prearrival.immigration.gov.vn/home-page</strong> at least 3 days before arriving in Vietnam. On-site QR at the airport is available but not recommended — it causes delays.</li>
+        <li><strong>PH e-Travel Registration:</strong> Complete at <strong>etravel.gov.ph</strong> within 72 hours before departing from the Philippines.</li>
+      </ul>
+      No Vietnam visa is currently required for Filipino citizens for stays up to 45 days, but always confirm the latest status with POTB before booking.
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">04</span><span class="fqt">What should clients pack for Da Nang?</span><span class="fico">+</span></div>
+    <div class="fa">
+      <strong>Clothing:</strong>
+      <ul>
+        <li>Light, breathable clothes for the beach and city (very warm Feb–Aug)</li>
+        <li>Layer or light jacket for Ba Na Hills — the cable car ascends to 1,400m altitude and it's significantly cooler at the top (sometimes foggy and cold)</li>
+        <li>Comfortable walking shoes for Hoi An and Hue sightseeing</li>
+        <li>Modest clothes for temple visits (Hue Imperial City, Thien Mu Pagoda)</li>
+        <li>Swimwear for My Khe Beach</li>
+        <li>Rain jacket or compact umbrella (especially Sep–Nov)</li>
+      </ul>
+      <strong>Documents:</strong>
+      <ul>
+        <li>Philippine passport (valid 6+ months)</li>
+        <li>Return flight ticket</li>
+        <li>POTB travel voucher</li>
+        <li>Travel insurance certificate</li>
+        <li>Cash: USD for tips and larger purchases, VND for local markets and street food</li>
+      </ul>
+      <div class="tip">Ba Na Hills tip: Even in summer, bring a light jacket for the cable car ride and mountaintop — temperature can drop 8–12°C from the base.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">05</span><span class="fqt">What optional tours are available? Which are must-do?</span><span class="fico">+</span></div>
+    <div class="fa">
+      <ul>
+        <li><strong>Ba Na Hills – Golden Bridge Tour (Full day, joiner):</strong> <strong>₱4,760 adult / ₱2,560 child</strong> — includes cable car, Golden Bridge, Buffet lunch, Fantasy Park, French Village. Pick-up 7:30–8:00 AM.</li>
+        <li><strong>Hue Imperial City Tour (Full day, joiner):</strong> <strong>₱3,820 adult / ₱2,090 child</strong> — Hai Van Pass, Khai Dinh Tomb, Hue Imperial City, Thien Mu Pagoda, set-menu lunch. Pick-up 7:45 AM.</li>
+        <li><strong>Bamboo Basket – Hoi An City Tour (12 PM–7:30 PM):</strong> <strong>₱2,750 adult / ₱1,550 child</strong> — basket boat, Hoi An Ancient Town, lantern release, Hoi An local dinner.</li>
+        <li><strong>Bamboo Basket & Lantern Making Class (AM or PM):</strong> <strong>₱1,930 adult / ₱1,140 child</strong> — crabs, mussels, lantern crafting, basket boat, 7-dish meal.</li>
+      </ul>
+      <div class="good">Ba Na Hills is the undisputed #1 highlight of Da Nang. Every client who visits says it's their most photographed experience. Always upsell this first!</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">06</span><span class="fqt">What are the surcharge periods for Da Nang packages?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Package rates do NOT apply during these periods — surcharges are advised upon request:
+      <ul>
+        <li>Christmas to New Year: Dec 23, 2025 – Jan 1, 2026</li>
+        <li>Chinese New Year: Feb 16–22, 2026</li>
+        <li>Victory Day: Apr 30, 2026</li>
+        <li>International Labor Day: May 1, 2026</li>
+        <li>Vietnam Independence Day: Sep 2, 2026</li>
+      </ul>
+      <div class="warn">Always verify with POTB before quoting any of these dates. Do not use standard tariff rates for holidays.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">07</span><span class="fqt">How does the tipping policy work and how much should clients budget?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Tipping is mandatory, paid directly to guide/driver on-site:
+      <ul>
+        <li>Group of 2–4 pax: <strong>USD 8/pax/day</strong></li>
+        <li>Group of 5–9 pax: <strong>USD 6/pax/day</strong></li>
+        <li>Group of 10–15 pax: <strong>USD 5/pax/day</strong></li>
+        <li>Group of 16+ pax: <strong>USD 4/pax/day</strong></li>
+        <li>Cruise tours: <strong>USD 5/person</strong></li>
+      </ul>
+      For a couple (2 pax) on a 3-day trip with 2 active tour days, budget <strong>USD 32 in tips</strong> (2 pax × USD 8 × 2 days).
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">08</span><span class="fqt">What is the package validity and what happens for travel after September 2026?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Da Nang packages are valid only <strong>until September 2026</strong>. This is shorter than other destinations. For travel in October 2026 or beyond:
+      <ul>
+        <li>Current rates no longer apply</li>
+        <li>A fresh quotation must be requested from POTB</li>
+        <li>Pricing may differ significantly due to new hotel contracts</li>
+      </ul>
+      <div class="warn">Never confirm a Da Nang booking for October 2026+ using current tariff rates. Always get a new quote from POTB.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">09</span><span class="fqt">What local tips should I share with clients visiting Da Nang?</span><span class="fico">+</span></div>
+    <div class="fa">
+      <ul>
+        <li><strong>Ride-hailing:</strong> Download Grab before arrival — safest and most transparent pricing for getting around.</li>
+        <li><strong>Beach:</strong> My Khe Beach is free and gorgeous. Best in the morning before 10 AM — afternoon gets very hot and crowded.</li>
+        <li><strong>Hoi An evenings:</strong> The Ancient Town glows at night with paper lanterns. Visit the Full Moon Lantern Festival (14th of each lunar month) for an unforgettable experience.</li>
+        <li><strong>Food must-try:</strong> Banh mi, Mi Quang (Da Nang-style turmeric noodles), White Rose dumplings in Hoi An, and Cao Lau.</li>
+        <li><strong>Currency:</strong> VND for local transactions. Avoid airport exchange — better rates at local exchange shops.</li>
+        <li><strong>Ba Na Hills:</strong> Go on a weekday to avoid weekend crowds. Arrive early to maximize time at the top.</li>
+        <li><strong>Drink bottled water only.</strong> Street drinks with ice at reputable stalls are generally safe.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">10</span><span class="fqt">Can non-Filipino passport holders book the Da Nang package?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Yes — but non-Philippine passport holders may be subject to an <strong>additional charge fee that varies by nationality</strong>. Visa requirements, ground handling surcharges, and group visa costs may differ.<br><br>
+      Always disclose the complete passport details of all travelers when submitting a booking to POTB so the correct requirements and rates can be applied.
+    </div>
+  </div>
+
+  <div class="acard">
+    <h3>✈️ Da Nang — Complete Pre-Travel Checklist</h3>
+    <ul>
+      <li><span class="sdot">1</span><span><strong>PH e-Travel</strong> — Register at <a href="https://etravel.gov.ph">etravel.gov.ph</a> within 72 hours before departure from PH.</span></li>
+      <li><span class="sdot">2</span><span><strong>Vietnam Pre-Arrival Form (NEW – Apr 15, 2026)</strong> — Complete at <a href="https://prearrival.immigration.gov.vn/home-page">prearrival.immigration.gov.vn</a> at least 3 days before arrival.</span></li>
+      <li><span class="sdot">3</span><span><strong>PH Travel Tax – ₱1,670</strong> — Paid at the TIEZA counter at the PH airport before boarding.</span></li>
+      <li><span class="sdot">4</span><span><strong>Passport validity</strong> — At least 6 months beyond the travel date.</span></li>
+      <li><span class="sdot">5</span><span><strong>Tips budget</strong> — USD 4–8/pax/day depending on group size. Bring small USD bills in cash.</span></li>
+      <li><span class="sdot">6</span><span><strong>Light jacket for Ba Na Hills</strong> — Temperature at the summit can be 8–12°C cooler than the city.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════ JAPAN ══════════ -->
+<section class="destination" id="jp">
+  <div class="dest-banner">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Sakuramoto-cho%2C_Naka_Ward%2C_Yokohama%2C_Kanagawa_Prefecture_230-0045%2C_Japan_-_panoramio_%281%29.jpg/1280px-Sakuramoto-cho%2C_Naka_Ward%2C_Yokohama%2C_Kanagawa_Prefecture_230-0045%2C_Japan_-_panoramio_%281%29.jpg" alt="Japan cherry blossoms sakura spring">
+    <div class="dest-overlay"></div>
+    <div class="dest-text">
+      <h2>Japan</h2>
+      <p>Haneda Airport (HND) · Valid until December 2026</p>
+      <div class="dtags">
+        <span class="dtag">5D4N Osaka Free & Easy</span>
+        <span class="dtag">5D4N Tokyo Free & Easy</span>
+        <span class="dtag">Private Driver-Guide Included</span>
+        <span class="dtag">Visa Required for Filipinos</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="photos-title">Attractions Clients Will Visit</div>
+  <div class="pgrid">
+    <div class="pcard pcard-tall">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Torii_gates_in_Fushimi_Inari_Taisha.jpg/800px-Torii_gates_in_Fushimi_Inari_Taisha.jpg" alt="Fushimi Inari Shrine Kyoto torii gates red Japan">
+      <div class="pcard-lbl">Fushimi Inari — Kyoto (Osaka Package)</div>
+    </div>
+    <div class="pcard pcard-tall">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/A_small_cup_of_coffee.JPG/800px-A_small_cup_of_coffee.JPG" alt="Shibuya crossing Tokyo night">
+      <div class="pcard-lbl">Shibuya Crossing — Tokyo</div>
+    </div>
+    <div class="pcard">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/OsakaCastle_1.jpg/1200px-OsakaCastle_1.jpg" alt="Osaka Castle Japan cherry blossoms">
+      <div class="pcard-lbl">Osaka Castle</div>
+    </div>
+    <div class="pcard">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Arashiyama_Bamboo_Grove.jpg/800px-Arashiyama_Bamboo_Grove.jpg" alt="Arashiyama Bamboo Grove Kyoto Japan">
+      <div class="pcard-lbl">Arashiyama Bamboo Grove — Kyoto</div>
+    </div>
+    <div class="pcard">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Mount_Fuji_from_Hotel_Mt_Fuji_2.jpg/1200px-Mount_Fuji_from_Hotel_Mt_Fuji_2.jpg" alt="Mount Fuji Japan snow blue sky">
+      <div class="pcard-lbl">Mount Fuji — Tokyo Package</div>
+    </div>
+    <div class="pcard">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Sensoji_temple_and_Nakamise_Street%2C_Asakusa%2C_Tokyo.jpg/1200px-Sensoji_temple_and_Nakamise_Street%2C_Asakusa%2C_Tokyo.jpg" alt="Sensoji Temple Asakusa Tokyo Japan">
+      <div class="pcard-lbl">Sensoji Temple — Asakusa, Tokyo</div>
+    </div>
+  </div>
+
+  <div class="rates">
+    <div class="rcard"><div class="rl">Osaka Lean 9 pax</div><div class="rv">₱26,799</div><div class="rs">per pax</div></div>
+    <div class="rcard"><div class="rl">Osaka Lean 2 pax</div><div class="rv">₱40,399</div><div class="rs">per pax</div></div>
+    <div class="rcard"><div class="rl">Osaka Peak 9 pax</div><div class="rv">₱34,899</div><div class="rs">per pax</div></div>
+    <div class="rcard"><div class="rl">Osaka Peak 2 pax</div><div class="rv">₱47,899</div><div class="rs">per pax</div></div>
+    <div class="rcard"><div class="rl">Tokyo rates</div><div class="rv">≈Same</div><div class="rs">as Osaka</div></div>
+    <div class="rcard"><div class="rl">Weekend add-on</div><div class="rv">+USD17</div><div class="rs">per pax/night</div></div>
+  </div>
+
+  <div class="faq-title">Frequently Asked Questions</div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">01</span><span class="fqt">What is the best month to visit Japan?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Japan has four distinct seasons — all beautiful but with very different experiences and price levels:
+      <div class="month-grid">
+        <div class="mb mb-good">Jan<label>Winter</label></div>
+        <div class="mb mb-good">Feb<label>Winter</label></div>
+        <div class="mb mb-hot">Mar<label>Sakura!</label></div>
+        <div class="mb mb-hot">Apr<label>Sakura!</label></div>
+        <div class="mb mb-good">May<label>Mild</label></div>
+        <div class="mb mb-best">Jun<label>Lean</label></div>
+        <div class="mb mb-best">Jul<label>Lean</label></div>
+        <div class="mb mb-best">Aug<label>Summer</label></div>
+        <div class="mb mb-best">Sep<label>Lean</label></div>
+        <div class="mb mb-hot">Oct<label>Foliage!</label></div>
+        <div class="mb mb-hot">Nov<label>Foliage!</label></div>
+        <div class="mb mb-peak">Dec<label>Peak</label></div>
+      </div>
+      <ul>
+        <li><strong>Mar–Apr (Cherry Blossom / Sakura):</strong> Most popular and most expensive. Peak prices apply. Breathtaking pink blossoms everywhere. Book 6–8 weeks in advance.</li>
+        <li><strong>Jun–Sep (Lean season, lower rates):</strong> Summer in Japan is hot and humid but cheaper, with vibrant festivals (Obon in August).</li>
+        <li><strong>Oct–Nov (Autumn foliage / Koyo):</strong> Second most popular season. Stunning red and orange leaves. Peak prices — book early.</li>
+        <li><strong>Dec–Feb (Winter):</strong> Lean rates, fewer crowds. Cold but magical with New Year celebrations (Shogatsu). Snow in some regions.</li>
+      </ul>
+      <div class="tip">Best value time: June–September. Lean rates + summer festivals + no need to book months in advance.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">02</span><span class="fqt">What fees and surcharges should clients budget for beyond the Japan package?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Japan is one of the higher-cost destinations. Complete cost breakdown:
+      <ul>
+        <li><strong>Japan Visa:</strong> Subject for quotation — required for Filipino citizens. Must be arranged before departure.</li>
+        <li><strong>Compulsory travel insurance:</strong> Mandatory (₱419 and up depending on age)</li>
+        <li><strong>Philippine Travel Tax:</strong> ₱1,670/pax — paid at TIEZA counter at PH airport</li>
+        <li><strong>Fuel surcharge:</strong> Mandatory, varies by date. Confirm with POTB.</li>
+        <li><strong>Mandatory driver-guide tip:</strong> ₱300/pax/day — for 5 days = ₱1,500/pax total</li>
+        <li><strong>Weekend surcharge:</strong> USD 17/pax/night for Friday and Saturday stays</li>
+        <li><strong>Holiday surcharges:</strong> Golden Week (Apr 29–May 5), Obon (Aug 13–16), Shogatsu (Jan 1–3), and others</li>
+        <li><strong>Optional tours:</strong> ₱8,860–₱17,680/pax depending on tour and group size</li>
+        <li><strong>Japan cash:</strong> Japan is still very cash-heavy. Bring Yen (JPY) — approx ₱0.37 per Yen.</li>
+      </ul>
+      <div class="warn">All rates are exclusive of tax. Never quote the package price as the total all-in cost. Japan has many additional mandatory fees.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">03</span><span class="fqt">What are the Japan visa requirements? How long does it take?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Filipino citizens require a Japan visa. Key things to know:
+      <ul>
+        <li>POTB can assist with visa arrangements — subject to separate quotation</li>
+        <li>Typical processing time: 5–10 working days</li>
+        <li>Documents usually required: passport, photos, bank statements (last 3–6 months), ITR or COE, return ticket, accommodation proof</li>
+        <li>Japan visa is a single-entry or multi-entry tourist visa (varies)</li>
+      </ul>
+      <div class="red">If the client is denied entry at the Japan airport due to visa issues, the <strong>tour fare is fully non-refundable</strong>. This makes travel insurance even more critical for Japan bookings.</div>
+      <div class="tip">Book Japan at least 4–6 weeks in advance during peak season to allow visa processing time. For March–April sakura season, book 8–10 weeks ahead.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">04</span><span class="fqt">Are there any arrival card or entry requirements for Japan?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Japan has streamlined its entry process. Current requirements:
+      <ul>
+        <li><strong>Valid Japan Visa</strong> — must be obtained before departure (not visa-on-arrival for Filipinos)</li>
+        <li><strong>Visit Japan Web (optional but recommended):</strong> Pre-register at <strong>vjw-lp.digital.go.jp</strong> to speed up immigration and customs by pre-submitting arrival and customs declaration digitally. Free to register.</li>
+        <li><strong>PH e-Travel Registration:</strong> Register at etravel.gov.ph within 72 hours before departing from the Philippines.</li>
+        <li><strong>Customs Declaration:</strong> All passengers fill a customs declaration form on the plane or via Visit Japan Web app. Declare items over JPY 1,000,000 in value or restricted goods.</li>
+      </ul>
+      <div class="tip">Visit Japan Web is highly recommended — it allows immigration QR code scanning and speeds up arrival dramatically, especially at busy Haneda Airport.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">05</span><span class="fqt">What should clients pack and bring to Japan?</span><span class="fico">+</span></div>
+    <div class="fa">
+      <strong>Clothing (season-dependent):</strong>
+      <ul>
+        <li>Spring (Mar–May): Layers — mornings and evenings are cool (10–18°C), afternoons warm. Light jacket essential.</li>
+        <li>Summer (Jun–Aug): Light, breathable clothes. Japan summers are hot and humid (28–35°C).</li>
+        <li>Autumn (Sep–Nov): Layers again — temperatures vary 10–25°C. Light to medium jacket.</li>
+        <li>Winter (Dec–Feb): Warm coat, thermal layers, gloves, scarf. Tokyo winters: 0–10°C.</li>
+        <li><strong>Always:</strong> Comfortable walking shoes — lots of walking and standing. Japan has incredible public transport but also long walks.</li>
+        <li>Slip-on shoes are handy — many traditional restaurants and temples require shoe removal.</li>
+      </ul>
+      <strong>Documents & essentials:</strong>
+      <ul>
+        <li>Passport + valid Japan Visa</li>
+        <li>Return ticket + hotel booking proof</li>
+        <li>POTB travel voucher</li>
+        <li>Travel insurance certificate</li>
+        <li>Cash in Japanese Yen (JPY) — Japan is still heavily cash-based outside major cities</li>
+        <li>Pocket WiFi or SIM card (highly recommended — available at Haneda Airport on arrival)</li>
+      </ul>
+      <div class="good">Japan tip: Get a prepaid IC card (Suica or Pasmo) at Haneda Airport. Works on trains, buses, and many convenience stores. Makes getting around effortless.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">06</span><span class="fqt">What is the difference between Package 1 (Osaka) and Package 2 (Tokyo)?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Both packages are 5D4N with nearly identical pricing. Key differences:
+      <ul>
+        <li><strong>Package 1 – Osaka:</strong> Osaka Castle, Shin Tennoji Temple, Shinsekai, Kuromon Seafood Market, Dotonbori/Shinsaibashi, Nara Deer Park, Fushimi Inari (Kyoto), Gion District, Kiyomizudera Temple, Arashiyama Bamboo Forest. Optional: USJ.</li>
+        <li><strong>Package 2 – Tokyo:</strong> Asakusa (Sensoji Temple), Nakamise Street, Tokyo Skytree, Imperial Palace, Ueno Park, Shibuya Crossing, Hachiko Statue, Mt. Fuji (Oishi Park), Kawaguchi Lake, Gotemba Factory Outlet. Optional: Disneyland.</li>
+      </ul>
+      <div class="tip">First-timers: Osaka package covers more cultural depth (Kyoto + Nara day trips). Tokyo package is more modern and iconic. Many repeat visitors do Tokyo first, Osaka/Kyoto second.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">07</span><span class="fqt">Why is the price per person so different based on group size?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Japan packages use <strong>private vehicles with a dedicated English-speaking driver-guide</strong>. The vehicle cost is split among the group:
+      <ul>
+        <li>2–5 pax: Alphard van</li>
+        <li>6–9 pax: HiAce van</li>
+        <li>10–15 pax: Coaster minibus</li>
+        <li>16–40 pax: Full bus</li>
+      </ul>
+      Lean season difference: 9 pax = ₱26,799/pax vs 2 pax = ₱40,399/pax — a <strong>₱13,600 per-person savings</strong> just from having more travelers!
+      <div class="good">Japan is the best destination to promote group travel to. Family reunions, friend groups, and office trips get dramatically lower per-person rates the more they add.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">08</span><span class="fqt">What optional tours are available for Japan?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Private optional tours (full day with entrance fees and transfers):
+      <br><br>
+      <strong>Osaka Package:</strong>
+      <ul>
+        <li>Osaka City Tour: 2 pax = ₱12,950/pax | 3–4 pax = ₱8,860/pax</li>
+        <li>USJ (Universal Studios Japan): 2 pax = ₱17,680/pax | 3–4 pax = ₱13,580/pax</li>
+        <li>Outside Osaka (Nara + Kyoto): 2 pax = ₱16,730/pax | 3–4 pax = ₱11,690/pax</li>
+      </ul>
+      <strong>Tokyo Package:</strong>
+      <ul>
+        <li>Tokyo City Tour: 2 pax = ₱12,950/pax | 3–4 pax = ₱8,860/pax</li>
+        <li>Disney Tour: 2 pax = ₱17,680/pax | 3–4 pax = ₱13,580/pax</li>
+        <li>Mt. Fuji Tour: 2 pax = ₱16,730/pax | 3–4 pax = ₱11,690/pax</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">09</span><span class="fqt">What local tips should I share with Japan-bound clients?</span><span class="fico">+</span></div>
+    <div class="fa">
+      <ul>
+        <li><strong>Cash is king:</strong> Many small restaurants, temples, and shops only accept cash. Exchange to Yen before or at the airport.</li>
+        <li><strong>Bowing is the Japanese greeting</strong> — a slight bow when thanking someone is always appreciated.</li>
+        <li><strong>Convenience stores (7-Eleven, FamilyMart, Lawson)</strong> sell excellent, affordable food and are open 24/7. Great for breakfast.</li>
+        <li><strong>Trash cans are rare</strong> on the streets — carry a small bag for rubbish until you find one (usually at convenience stores).</li>
+        <li><strong>No eating while walking</strong> is general etiquette, especially in Kyoto.</li>
+        <li><strong>Shoes off</strong> at many traditional restaurants, ryokans, and shrine inner areas.</li>
+        <li><strong>Be quiet on the train</strong> — no phone calls, keep voices low. Japan's trains are extremely punctual (within seconds).</li>
+        <li><strong>Tax-free shopping:</strong> Foreigners can get tax-free (8% off) at many department stores with passport. Worth it for big purchases!</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">10</span><span class="fqt">What is the cancellation and urgent booking policy for Japan?</span><span class="fico">+</span></div>
+    <div class="fa">
+      <ul>
+        <li>Urgent bookings arriving <strong>less than 5 days before arrival</strong> may incur surcharges and availability issues</li>
+        <li>All unused portions of the package are <strong>non-refundable</strong></li>
+        <li>Clients denied entry at Japan airport = <strong>full non-refundable</strong></li>
+        <li>Room type (double/twin) is subject to hotel availability on check-in day</li>
+        <li>Hotel check-in: 2:00 PM | Check-out: 12:00 PM</li>
+      </ul>
+      <div class="warn">Book Japan early — especially for March–April (sakura) and October–November (foliage). Hotels and vehicles book up months in advance during peak season.</div>
+    </div>
+  </div>
+
+  <div class="acard">
+    <h3>✈️ Japan — Complete Pre-Travel Checklist</h3>
+    <ul>
+      <li><span class="sdot">1</span><span><strong>PH e-Travel</strong> — Register at <a href="https://etravel.gov.ph">etravel.gov.ph</a> within 72 hours before departure from PH.</span></li>
+      <li><span class="sdot">2</span><span><strong>Japan Visa</strong> — Required for Filipino citizens. Process at least 4–6 weeks before travel (8–10 weeks for sakura season). POTB can assist.</span></li>
+      <li><span class="sdot">3</span><span><strong>Visit Japan Web (recommended)</strong> — Pre-register at vjw-lp.digital.go.jp to get a QR code that speeds up immigration and customs at Haneda Airport.</span></li>
+      <li><span class="sdot">4</span><span><strong>PH Travel Tax – ₱1,670</strong> — Paid at the TIEZA counter at the PH departure airport.</span></li>
+      <li><span class="sdot">5</span><span><strong>Tips budget</strong> — ₱300/pax/day for the private driver-guide. For 5 days = ₱1,500/pax. Paid in cash on-site.</span></li>
+      <li><span class="sdot">6</span><span><strong>Cash in Yen (JPY)</strong> — Japan is heavily cash-based. Exchange before or at the airport. Bring credit card as backup for larger purchases.</span></li>
+      <li><span class="sdot">7</span><span><strong>Pocket WiFi or SIM</strong> — Essential for navigation and communication. Available at Haneda Airport on arrival.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════ HONG KONG ══════════ -->
+<section class="destination" id="hk">
+  <div class="dest-banner">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Hong_Kong_Night_Skyline.jpg/1280px-Hong_Kong_Night_Skyline.jpg" alt="Hong Kong Victoria Harbour night skyline">
+    <div class="dest-overlay"></div>
+    <div class="dest-text">
+      <h2>Hong Kong</h2>
+      <p>Hong Kong International Airport (HKG) · Valid until December 2026</p>
+      <div class="dtags">
+        <span class="dtag">Visa-free for Filipinos</span>
+        <span class="dtag">3D2N with Macau or 4D3N</span>
+        <span class="dtag">Disneyland & Ocean Park</span>
+        <span class="dtag">Macau Day Tour Included (3D2N)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="photos-title">Attractions Clients Will Visit</div>
+  <div class="pgrid">
+    <div class="pcard pcard-tall">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Hong_Kong_Disneyland_Castle_of_Magical_Dreams.jpg/1200px-Hong_Kong_Disneyland_Castle_of_Magical_Dreams.jpg" alt="Hong Kong Disneyland Castle of Magical Dreams">
+      <div class="pcard-lbl">Hong Kong Disneyland ⭐ Top Add-on</div>
+    </div>
+    <div class="pcard pcard-tall">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Ruins_of_the_Church_of_St._Paul%27s%2C_Macau%2C_2013.jpg/800px-Ruins_of_the_Church_of_St._Paul%27s%2C_Macau%2C_2013.jpg" alt="Macau Ruins of St Paul Cathedral facade">
+      <div class="pcard-lbl">Macau — Ruins of St. Paul (included in 3D2N)</div>
+    </div>
+    <div class="pcard">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Ngong_Ping_360_Hong_Kong_Cable_Car.jpg/1200px-Ngong_Ping_360_Hong_Kong_Cable_Car.jpg" alt="Ngong Ping 360 cable car Hong Kong Lantau Island">
+      <div class="pcard-lbl">Ngong Ping 360 Cable Car</div>
+    </div>
+    <div class="pcard">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Ocean_Park_Hong_Kong.jpg/1200px-Ocean_Park_Hong_Kong.jpg" alt="Ocean Park Hong Kong aerial view">
+      <div class="pcard-lbl">Ocean Park (closed Tuesdays)</div>
+    </div>
+    <div class="pcard">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/AvenueOfStars_2019_2.jpg/1200px-AvenueOfStars_2019_2.jpg" alt="Avenue of Stars Hong Kong Tsim Sha Tsui waterfront">
+      <div class="pcard-lbl">Avenue of Stars — City Tour</div>
+    </div>
+    <div class="pcard">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/The_Venetian_Macao_exterior.jpg/1200px-The_Venetian_Macao_exterior.jpg" alt="The Venetian Macao casino resort">
+      <div class="pcard-lbl">The Venetian Macau — Free Time</div>
+    </div>
+  </div>
+
+  <div class="rates">
+    <div class="rcard"><div class="rl">3D2N Twin Budget (Jun 13–30)</div><div class="rv">₱6,099</div><div class="rs">Rambler Oasis</div></div>
+    <div class="rcard"><div class="rl">3D2N Twin Budget (Jul–Aug peak)</div><div class="rv">₱7,499</div><div class="rs">Rambler Oasis</div></div>
+    <div class="rcard"><div class="rl">3D2N Twin Silka (Oct–Dec)</div><div class="rv">₱9,499</div><div class="rs">Silka Tsuen Wan</div></div>
+    <div class="rcard"><div class="rl">4D3N Twin Panda 4★ (Jun–Jul)</div><div class="rv">₱12,699</div><div class="rs">Panda Hotel</div></div>
+    <div class="rcard"><div class="rl">4D3N Twin Harbour Grand 5★</div><div class="rv">₱11,899</div><div class="rs">Jun 13–30 rate</div></div>
+    <div class="rcard"><div class="rl">Sneak-in (child only)</div><div class="rv">₱3,899</div><div class="rs">all periods</div></div>
+  </div>
+
+  <div class="faq-title">Frequently Asked Questions</div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">01</span><span class="fqt">What is the best month to visit Hong Kong?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Hong Kong has subtropical weather with four mild seasons. Best travel months:
+      <div class="month-grid">
+        <div class="mb mb-good">Jan<label>Cool</label></div>
+        <div class="mb mb-best">Feb<label>Best</label></div>
+        <div class="mb mb-best">Mar<label>Best</label></div>
+        <div class="mb mb-best">Apr<label>Best</label></div>
+        <div class="mb mb-good">May<label>Warm</label></div>
+        <div class="mb mb-peak">Jun<label>Hot/Rain</label></div>
+        <div class="mb mb-hot">Jul<label>Typhoon</label></div>
+        <div class="mb mb-hot">Aug<label>Typhoon</label></div>
+        <div class="mb mb-good">Sep<label>Cooling</label></div>
+        <div class="mb mb-best">Oct<label>Best</label></div>
+        <div class="mb mb-best">Nov<label>Best</label></div>
+        <div class="mb mb-good">Dec<label>Cool</label></div>
+      </div>
+      <ul>
+        <li><strong>Oct–Dec (Best season):</strong> Dry, clear skies, pleasant 18–25°C. Perfect for outdoor sightseeing, the harbour, and Disneyland without sweating. Some peak surcharges in Oct (Golden Week).</li>
+        <li><strong>Feb–Apr:</strong> Comfortable weather (15–24°C), some morning mist. Spring is lovely with lower hotel rates post-CNY.</li>
+        <li><strong>Jul–Aug (Typhoon season):</strong> Hot, humid (30°C+), risk of typhoons. Tours may be disrupted. Not ideal but still manageable in between typhoons.</li>
+        <li><strong>January:</strong> Cool and dry. Good travel season after Lunar New Year crowd subsides.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">02</span><span class="fqt">What fees and extra charges should clients budget for beyond the HK package?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Complete cost breakdown beyond the package rate:
+      <ul>
+        <li><strong>Compulsory travel insurance:</strong> ₱419 (6 months–75 yrs) / ₱688 (76–80) / ₱957 (81–85)</li>
+        <li><strong>Philippine Travel Tax:</strong> ₱1,670/pax — paid at TIEZA counter at PH airport</li>
+        <li><strong>Fuel surcharge:</strong> Mandatory, varies by travel date. Confirm with POTB.</li>
+        <li><strong>Friday & Saturday surcharge:</strong> ₱500–₱1,300/pax/day depending on hotel (Solo: ₱1,000–₱2,600). Applies every single Fri/Sat.</li>
+        <li><strong>Peak event surcharges:</strong> Oct 1–4 (HK National Day), Oct 10–20 (Golden Week HK), Dec 31 (NYE up to ₱1,700–₱2,300/pax/day)</li>
+        <li><strong>Hotel security deposit:</strong> Paid at hotel on check-in (refundable)</li>
+        <li><strong>Optional tours:</strong> ₱4,399–₱10,299/pax depending on activity</li>
+        <li><strong>Macau tour for non-Filipino passport holders:</strong> Additional USD 30 for group visa</li>
+        <li><strong>Flight change fee:</strong> USD 15/pax if flight changes without 24 hours' notice</li>
+        <li><strong>Student/religious group surcharge:</strong> USD 30/pax</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">03</span><span class="fqt">Are there arrival card or entry requirements for Hong Kong?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Entry requirements for Hong Kong (Filipinos):
+      <ul>
+        <li><strong>No visa required</strong> for Filipino citizens (visa-free for up to 14 days)</li>
+        <li><strong>PH e-Travel Registration</strong> — All Filipino passengers must register at <strong>etravel.gov.ph</strong> within 72 hours before departure from the Philippines</li>
+        <li><strong>Health Declaration</strong> — No longer required as of 2024. Check with POTB for the latest status.</li>
+        <li><strong>Passport validity</strong> — At least 6 months beyond departure date</li>
+        <li><strong>Return ticket and accommodation proof</strong> may be checked at immigration</li>
+      </ul>
+      <div class="tip">Non-Filipino passport holders: Check visa requirements specific to nationality before booking. Some nationalities require an HK visa in advance.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">04</span><span class="fqt">What should clients pack and bring to Hong Kong?</span><span class="fico">+</span></div>
+    <div class="fa">
+      <strong>Clothing (season-dependent):</strong>
+      <ul>
+        <li>Oct–Dec & Feb–Apr: Light layers — daytime warm (20–25°C), evenings cool (15–18°C). A light jacket is essential.</li>
+        <li>Jun–Sep: Light, breathable summer clothes. Very hot and humid. Bring small umbrella for typhoon season.</li>
+        <li>Jan: Light coat or warm jacket — evenings can dip to 10–13°C.</li>
+        <li>Comfortable walking shoes for the city tour, Tsim Sha Tsui, and Ngong Ping hiking areas</li>
+      </ul>
+      <strong>Documents & essentials:</strong>
+      <ul>
+        <li>Philippine passport (valid 6+ months)</li>
+        <li>Return ticket printout (may be checked)</li>
+        <li>POTB travel voucher (printed or digital)</li>
+        <li>Travel insurance certificate</li>
+        <li>Cash in HKD (Hong Kong Dollar) — approx ₱7 per HKD</li>
+        <li>Octopus Card — prepaid transit card for MTR, buses, trams, ferries, and many shops</li>
+      </ul>
+      <div class="tip">Get an Octopus Card at the airport upon arrival (HKD 150 = HKD 50 deposit + HKD 100 credit). It works on virtually all public transport in HK and even at 7-Eleven.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">05</span><span class="fqt">What is the difference between the 3D2N and 4D3N Hong Kong packages?</span><span class="fico">+</span></div>
+    <div class="fa">
+      <strong>3D2N Package (most popular):</strong>
+      <ul>
+        <li>Day 1: Arrival → hotel check-in</li>
+        <li>Day 2: Full-day Macau Tour with lunch (round-trip ferry, Ruins of St. Paul, A Ma Temple, Macau Tower photo stop, Venetian free time)</li>
+        <li>Day 3: Compulsory HK City Tour (Avenue of Stars, Jewelry Factory, 30-min Victoria Harbour boat trip) → departure</li>
+      </ul>
+      <strong>4D3N Free & Easy:</strong>
+      <ul>
+        <li>Day 1: Arrival</li>
+        <li>Day 2: HK City Tour (Avenue of Stars, Jewelry Factory, 30-min Water Taxi ride)</li>
+        <li>Day 3: Full free day — Disneyland, Ocean Park, Ngong Ping, or leisure</li>
+        <li>Day 4: Free until departure transfer</li>
+      </ul>
+      <div class="tip">3D2N is perfect for tight schedules — Macau is bundled in. 4D3N is better for clients who want a full day at Disneyland or Ocean Park.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">06</span><span class="fqt">What is "Sneak In" and how do I explain it to clients properly?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Sneak In is an informal arrangement where an extra person (child only) shares an existing room without formally registering at the hotel's front desk.
+      <ul>
+        <li>Rate: <strong>₱3,899 per child</strong> — consistent across all date ranges</li>
+        <li><strong>Adults are strictly NOT allowed</strong> as sneak-in</li>
+        <li>The sneak-in guest must <strong>NOT check in at the front desk</strong>. They access the room discreetly with the other registered guests.</li>
+        <li>Hotel check-in is 2:00–3:00 PM; check-out is 11:00 AM</li>
+      </ul>
+      <div class="warn">This is an informal arrangement. The risk lies with the guest. Make sure clients understand this arrangement before confirming.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">07</span><span class="fqt">What optional tours are available in Hong Kong and how much do they cost?</span><span class="fico">+</span></div>
+    <div class="fa">
+      With land arrangement package (SIC basis):
+      <ul>
+        <li>Disneyland Tier 1: <strong>₱8,699 adult / ₱6,999 child</strong> (Tier 2: ₱9,299 | Tier 3: ₱10,299 | Tier 4: ₱10,899)</li>
+        <li>Ocean Park (closed Tuesdays): <strong>₱6,499 adult / ₱5,199 child</strong></li>
+        <li>Macau Tour with Lunch: <strong>₱9,599/pax</strong> — pick-up 7:00–8:00 AM</li>
+        <li>Night Tour (Peak Tram + Madame Tussauds + Star Ferry + Ladies Market): <strong>₱5,699/pax</strong></li>
+        <li>PM Ngong Ping 360 Cable Car: <strong>₱5,099 adult / ₱4,399 child</strong></li>
+        <li>Oriental Pearl Harbour Cruise with dinner (min 4 pax): <strong>₱6,399/pax</strong></li>
+        <li>Shenzhen Tour (includes group China visa free for 3+ pax): <strong>₱4,399/pax</strong></li>
+      </ul>
+      <div class="warn">Without a land arrangement package: add USD 10/pax to all tour rates above.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">08</span><span class="fqt">What is the new airport meeting point in Hong Kong?</span><span class="fico">+</span></div>
+    <div class="fa">
+      <strong>NEW meeting point (updated): Arrival Hall A, Pole No. 1 & 2</strong> at Hong Kong International Airport.<br><br>
+      The POTB representative will be waiting at this specific location. Clients who go to the wrong area may miss their transfer and incur additional re-arrangement fees.<br><br>
+      <div class="good">Pro agent tip: Send clients a screenshot or WhatsApp message of this exact meeting point the night before their departure. One minute of prep saves hours of confusion on arrival day.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">09</span><span class="fqt">What are the key peak surcharge dates to watch out for?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Surcharges apply on top of base rates. Example surcharges for Budget Hotel (Rambler Oasis):
+      <ul>
+        <li>Every <strong>Friday & Saturday:</strong> +₱500/pax/day (Twin/Triple) | Solo: +₱1,000</li>
+        <li>Sep 15–19: +₱700/pax/day</li>
+        <li>Oct 1–4 (National Day Golden Week): +₱1,300/pax/day | Solo: +₱2,600</li>
+        <li>Oct 10–13, Oct 17–20: +₱1,300/pax/day</li>
+        <li>Nov 10–13: +₱600/pax/day</li>
+        <li>Dec 24–25 (Christmas): +₱700/pax/day</li>
+        <li>Dec 31 (New Year's Eve): +₱1,700/pax/day | Solo: +₱3,300</li>
+      </ul>
+      <div class="warn">Each hotel (Silka, Panda, Harbour Grand, Royal Pacific) has its OWN surcharge schedule with different amounts and dates. Always confirm the specific hotel's surcharge with POTB before quoting.</div>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">10</span><span class="fqt">What local tips should I share with clients visiting Hong Kong?</span><span class="fico">+</span></div>
+    <div class="fa">
+      <ul>
+        <li><strong>Octopus Card</strong> is essential — works on MTR, buses, trams, Star Ferry, 7-Eleven, and McDonald's. Get one at the airport.</li>
+        <li><strong>Star Ferry (HKD 3.40)</strong> is the most iconic and cheapest way to cross Victoria Harbour — a must-do experience, not just transport.</li>
+        <li><strong>Dim sum breakfast</strong> at a local tea house is a quintessential HK experience. Try Tim Ho Wan (Michelin-starred, affordable).</li>
+        <li><strong>Temple Street Night Market</strong> for street food, fortune telling, and souvenir shopping. Go after 7 PM.</li>
+        <li><strong>Symphony of Lights</strong> — free laser and light show on Victoria Harbour every evening at 8 PM from the Tsim Sha Tsui waterfront.</li>
+        <li><strong>DBuy electronics carefully</strong> — Mong Kok electronics shops may have misleading pricing. Stick to official brand stores or reputable shops.</li>
+        <li><strong>HKD is easy to use everywhere.</strong> Credit cards widely accepted too, especially in malls and restaurants.</li>
+        <li><strong>Ocean Park is closed on Tuesdays. Disneyland is closed on Wednesdays.</strong> Check days carefully when booking optional tours.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fi">
+    <div class="fq" onclick="tf(this)"><span class="fnum">11</span><span class="fqt">To avail Disneyland or Ocean Park afternoon tours, is there a prerequisite?</span><span class="fico">+</span></div>
+    <div class="fa">
+      Yes — <strong>clients must attend the compulsory morning Hong Kong City Tour before they can join the afternoon Disneyland or Ocean Park tour</strong>. These tours are sequenced: city tour in the morning, theme park in the afternoon on the same day.<br><br>
+      The city tour visits Avenue of Stars, Jewelry Factory, and the Victoria Harbour Water Taxi ride. Coordinate the schedule with POTB during booking.
+      <div class="warn">Ocean Park closes on Tuesdays. Disneyland closes on Wednesdays. Always verify the day of the week against your client's travel dates before selling these add-ons.</div>
+    </div>
+  </div>
+
+  <div class="acard">
+    <h3>✈️ Hong Kong — Complete Pre-Travel Checklist</h3>
+    <ul>
+      <li><span class="sdot">1</span><span><strong>PH e-Travel</strong> — Register at <a href="https://etravel.gov.ph">etravel.gov.ph</a> within 72 hours before departure from the Philippines.</span></li>
+      <li><span class="sdot">2</span><span><strong>No HK visa needed</strong> — Filipino citizens enjoy visa-free entry to Hong Kong. Bring proof of return ticket and accommodation if asked at immigration.</span></li>
+      <li><span class="sdot">3</span><span><strong>PH Travel Tax – ₱1,670</strong> — Paid at the TIEZA counter at the PH departure airport.</span></li>
+      <li><span class="sdot">4</span><span><strong>NEW Airport Meeting Point</strong> — <strong>Arrival Hall A, Pole No. 1 & 2</strong>. Send this to your client before departure!</span></li>
+      <li><span class="sdot">5</span><span><strong>Get an Octopus Card</strong> — Buy at the airport on arrival (HKD 150). Works on all public transport and many shops.</span></li>
+      <li><span class="sdot">6</span><span><strong>Budget for Friday/Saturday surcharge</strong> — Applies every Fri & Sat on top of base rates. Ranges from ₱500 to ₱1,300+/pax/day depending on hotel.</span></li>
+      <li><span class="sdot">7</span><span><strong>Non-Filipino passport holders on Macau Tour</strong> — Additional USD 30 for group visa changes. Must be declared during booking.</span></li>
+    </ul>
+  </div>
+</section>
+
+</div>
+
+<script>
+function go(id){
+  document.querySelectorAll('.destination').forEach(d=>d.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelector('[onclick="go(\''+id+'\')"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function tf(el){
+  const item=el.closest('.fi');
+  const was=item.classList.contains('open');
+  document.querySelectorAll('.fi.open').forEach(i=>i.classList.remove('open'));
+  if(!was)item.classList.add('open');
+}
+</script>
+</body>
+</html>

@@ -133,6 +133,11 @@ body.admin-editing .admin-imgbox:hover{outline:2px solid #1a6ab1}
 #adminImgModal button{font-family:inherit;font-size:13px;font-weight:600;border:none;border-radius:8px;padding:9px 16px;cursor:pointer}
 #adminImgModal .aim-apply{background:#1a6ab1;color:#fff}
 #adminImgModal .aim-cancel{background:#f0ede6;color:#46443c}
+#adminImgModal .aim-or{text-align:center;font-size:11px;color:#9a9890;margin:10px 0 8px;text-transform:uppercase;letter-spacing:.08em}
+#adminImgModal .aim-upload{width:100%;background:#eef5ff;color:#1a3a6a;border:1px solid #bcd6f2}
+#adminImgModal .aim-upload:hover{background:#e0edfb}
+#adminImgModal .aim-note{font-size:12px;color:#1a7a40;margin-top:8px;min-height:16px}
+#adminImgModal .aim-note.err{color:#cc2a2a}
 </style>
 </head>
 <body>
@@ -1456,6 +1461,10 @@ function tf(el){
     +'  <div class="aim-title">Change image</div>'
     +'  <label>Image URL</label>'
     +'  <input id="aimUrl" type="text" placeholder="https://... paste an image link" autocomplete="off">'
+    +'  <div class="aim-or">— or —</div>'
+    +'  <button class="aim-upload" id="aimUploadBtn" type="button">⤴ Upload from device</button>'
+    +'  <input id="aimFile" type="file" accept="image/*" style="display:none">'
+    +'  <div class="aim-note" id="aimNote"></div>'
     +'  <div class="aim-prev"><span class="aim-ph">Preview</span></div>'
     +'  <div class="aim-actions">'
     +'    <button class="aim-cancel" id="aimCancel">Cancel</button>'
@@ -1467,22 +1476,69 @@ function tf(el){
   var aimPrev=modal.querySelector('.aim-prev');
   var aimApply=modal.querySelector('#aimApply');
   var aimCancel=modal.querySelector('#aimCancel');
+  var aimUploadBtn=modal.querySelector('#aimUploadBtn');
+  var aimFile=modal.querySelector('#aimFile');
+  var aimNote=modal.querySelector('#aimNote');
   var currentImg=null;
+  var pendingUpload=null;   // compressed data URL from an uploaded file, if any
 
   function renderPreview(url){
     if(url){ aimPrev.innerHTML='<img alt="preview" src="'+url.replace(/"/g,'&quot;')+'">'; }
     else { aimPrev.innerHTML='<span class="aim-ph">Preview</span>'; }
   }
+  function setNote(msg,isErr){ aimNote.textContent=msg||''; aimNote.className='aim-note'+(isErr?' err':''); }
+
+  /* Shrink + compress an image file in the browser so the embedded copy stays small. */
+  function compressImage(file,maxDim,quality){
+    return new Promise(function(resolve,reject){
+      var reader=new FileReader();
+      reader.onload=function(){
+        var img=new Image();
+        img.onload=function(){
+          var w=img.width,h=img.height;
+          if(w>maxDim||h>maxDim){
+            if(w>=h){ h=Math.round(h*maxDim/w); w=maxDim; }
+            else { w=Math.round(w*maxDim/h); h=maxDim; }
+          }
+          var c=document.createElement('canvas'); c.width=w; c.height=h;
+          c.getContext('2d').drawImage(img,0,0,w,h);
+          try{ resolve(c.toDataURL('image/jpeg',quality)); }catch(err){ reject(err); }
+        };
+        img.onerror=function(){ reject(new Error('decode')); };
+        img.src=reader.result;
+      };
+      reader.onerror=function(){ reject(new Error('read')); };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  aimUploadBtn.addEventListener('click',function(){ aimFile.value=''; aimFile.click(); });
+  aimFile.addEventListener('change',function(){
+    var f=aimFile.files&&aimFile.files[0];
+    if(!f) return;
+    setNote('Processing image…',false);
+    compressImage(f,1280,0.8).then(function(dataUrl){
+      pendingUpload=dataUrl;
+      aimUrl.value='';
+      renderPreview(dataUrl);
+      var kb=Math.round((dataUrl.length*3/4)/1024);
+      setNote('Ready: '+f.name+' (~'+kb+' KB). Click Apply.',false);
+    }).catch(function(){ setNote('Could not read that image. Try a JPG or PNG.',true); });
+  });
+
   function openImgEditor(img){
-    currentImg=img;
+    currentImg=img; pendingUpload=null; setNote('',false);
     var cur=img.getAttribute('src')||'';
     aimUrl.value=cur; renderPreview(cur);
     modal.classList.add('show'); aimUrl.focus(); aimUrl.select();
   }
-  function closeImgEditor(){ modal.classList.remove('show'); currentImg=null; }
-  aimUrl.addEventListener('input',function(){ renderPreview(aimUrl.value.trim()); });
+  function closeImgEditor(){ modal.classList.remove('show'); currentImg=null; pendingUpload=null; }
+  aimUrl.addEventListener('input',function(){ pendingUpload=null; setNote('',false); renderPreview(aimUrl.value.trim()); });
   aimApply.addEventListener('click',function(){
-    if(currentImg){ var u=aimUrl.value.trim(); currentImg.setAttribute('src',u); currentImg.src=u; }
+    if(currentImg){
+      var u=pendingUpload||aimUrl.value.trim();
+      if(u){ currentImg.setAttribute('src',u); currentImg.src=u; }
+    }
     closeImgEditor();
   });
   aimCancel.addEventListener('click',closeImgEditor);
